@@ -1,0 +1,35 @@
+/* DishFuse Global Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #1a1a1a;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3 {
+  color: #003333;
+}
+
+a {
+  color: #00bfa5;
+  text-decoration: none;
+}
+
+button, a.button {
+  background-color: #00bfa5;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover, a.button:hover {
+  background-color: #009e8d;
+}
+
+footer {
+  background-color: #001f1f;
+  color: #fff;
+}
