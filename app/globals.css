@@ -4,5 +4,46 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f5f7fa;
+  background-color: #0f172a;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: linear-gradient(90deg, #00bfa5, #1a3e70);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.hero {
+  background: linear-gradient(to bottom right, #1e293b, #0f172a);
+  text-align: center;
+  padding: 100px 20px;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-card {
+  background-color: #1e293b;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
 }
