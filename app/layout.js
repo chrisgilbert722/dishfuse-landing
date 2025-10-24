@@ -19,7 +19,16 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body style={{ backgroundColor: '#0f172a', color: 'white' }}>
+      <body
+        style={{
+          backgroundColor: '#0f172a',
+          color: 'white',
+          fontFamily: 'Inter, sans-serif',
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        {/* Header */}
         <header
           style={{
             padding: '20px',
@@ -28,26 +37,35 @@ export default function RootLayout({ children }) {
             textAlign: 'center',
             fontWeight: 'bold',
             fontSize: '1.5rem',
+            letterSpacing: '1px',
           }}
         >
           DishFuse
         </header>
 
+        {/* Main Content */}
         <main
           style={{
             padding: '40px',
-            maxWidth: '900px',
+            maxWidth: '1000px',
             margin: '0 auto',
           }}
         >
           {children}
         </main>
 
-        <footer style={{ padding: '20px', textAlign: 'center', opacity: 0.8 }}>
+        {/* Footer */}
+        <footer
+          style={{
+            padding: '20px',
+            textAlign: 'center',
+            opacity: 0.8,
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+          }}
+        >
           © {new Date().getFullYear()} DishFuse. All rights reserved.
         </footer>
       </body>
     </html>
   );
 }
-
