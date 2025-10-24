@@ -1,62 +1,66 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0f172a] border-t border-white/10 py-12 text-center md:text-left">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-        {/* === LOGO SECTION === */}
-        <div className="flex flex-col items-center md:items-start gap-4">
-          <Image
-            src="/images/logo-footer.png" // your footer logo
+    <footer className="bg-[#0f172a] text-gray-400 text-center py-12 border-t border-white/10">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* === LOGO + TAGLINE === */}
+        <div className="flex flex-col items-center mb-8">
+          <img
+            src="/images/dishfuse-logo-gold.png"
             alt="DishFuse Logo"
-            width={56}
-            height={56}
-            className="rounded-lg"
+            className="w-14 h-14 mb-4"
           />
-          <p className="text-gray-400 text-sm max-w-xs">
-            AI that helps restaurants predict, plan, and prevent waste — boosting profit and sustainability.
-          </p>
+          <h3 className="text-white text-lg font-semibold">
+            Dish<span className="text-emerald-400">Fuse</span> — Smarter, Simpler, More Profitable
+          </h3>
         </div>
 
-        {/* === LINKS SECTION === */}
-        <div className="flex flex-col items-center md:items-center gap-2">
-          <h4 className="text-white font-semibold mb-2">Quick Links</h4>
-          <Link href="#features" className="text-gray-300 hover:text-white text-sm">
+        {/* === NAVIGATION LINKS === */}
+        <div className="flex justify-center flex-wrap gap-6 mb-8 text-sm">
+          <Link href="#features" className="hover:text-emerald-400 transition">
             Features
           </Link>
-          <Link href="#pricing" className="text-gray-300 hover:text-white text-sm">
-            Pricing
-          </Link>
-          <Link href="#testimonials" className="text-gray-300 hover:text-white text-sm">
+          <Link href="#testimonials" className="hover:text-emerald-400 transition">
             Testimonials
           </Link>
-          <Link href="#contact" className="text-gray-300 hover:text-white text-sm">
+          <Link href="#pricing" className="hover:text-emerald-400 transition">
+            Pricing
+          </Link>
+          <Link href="#contact" className="hover:text-emerald-400 transition">
             Contact
           </Link>
         </div>
 
-        {/* === SOCIAL & COPYRIGHT === */}
-        <div className="flex flex-col items-center md:items-end gap-3">
-          <div className="flex gap-4">
-            <a href="#" className="text-gray-400 hover:text-emerald-400 transition">
-              <i className="fab fa-facebook-f"></i>
+        {/* === SOCIAL MEDIA ICONS === */}
+        <div className="flex justify-center gap-6 mb-6">
+          {[
+            { icon: "🐦", link: "https://twitter.com" },
+            { icon: "📘", link: "https://facebook.com" },
+            { icon: "📸", link: "https://instagram.com" },
+            { icon: "💼", link: "https://linkedin.com" },
+          ].map((social, i) => (
+            <a
+              key={i}
+              href={social.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-2xl hover:scale-110 transition-transform duration-300"
+            >
+              {social.icon}
             </a>
-            <a href="#" className="text-gray-400 hover:text-emerald-400 transition">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-emerald-400 transition">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-          <p className="text-gray-500 text-xs mt-2">
-            © {new Date().getFullYear()} DishFuse. All rights reserved.
-          </p>
+          ))}
         </div>
+
+        {/* === COPYRIGHT === */}
+        <p className="text-sm text-gray-500">
+          © {new Date().getFullYear()} DishFuse. All rights reserved.
+        </p>
       </div>
     </footer>
   );
 }
+
