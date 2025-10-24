@@ -1,119 +1,163 @@
+"use client";
+
+import React from "react";
+
 export default function Home() {
   return (
-    <main className="relative flex flex-col items-center justify-center min-h-screen text-white overflow-hidden">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute w-auto min-w-full min-h-full max-w-none object-cover brightness-50"
-      >
-        <source src="https://cdn.coverr.co/videos/coverr-chef-prepares-meal-1234/1080p.mp4" type="video/mp4" />
-      </video>
-
-      {/* Overlay Content */}
-      <div className="relative z-10 text-center px-6">
-        <h1 className="text-5xl font-bold mb-6">
-          Boost Restaurant Profits with AI that Predicts, Plans & Prevents Waste
-        </h1>
-        <p className="text-lg mb-8 max-w-2xl mx-auto">
-          DishFuse helps restaurants increase profit margins, reduce waste, and optimize operations using AI.
-        </p>
-        <a
-          href="#"
-          className="bg-gradient-to-r from-emerald-400 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:opacity-90 transition duration-300"
+    <>
+      {/* HERO SECTION */}
+      <section className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden">
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover opacity-30"
         >
-          Start Free 14-Day Trial
-        </a>
-      </div>
-            {/* Feature Section */}
-<section className="relative z-10 mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 px-8 max-w-6xl mx-auto">
-  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition">
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png"
-      alt="AI Menu Pricing"
-      className="w-16 h-16 mx-auto mb-4"
-    />
-    <h3 className="text-xl font-semibold mb-2 text-white">AI Menu Pricing</h3>
-    <p className="text-gray-200">
-      Smart pricing insights that increase profits automatically.
-    </p>
-  </div>
+          <source
+            src="https://cdn.coverr.co/videos/coverr-slicing-fresh-vegetables-1831/1080p.mp4"
+            type="video/mp4"
+          />
+        </video>
 
-  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition">
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/4149/4149670.png"
-      alt="Inventory Forecasting"
-      className="w-16 h-16 mx-auto mb-4"
-    />
-    <h3 className="text-xl font-semibold mb-2 text-white">Inventory Forecasting</h3>
-    <p className="text-gray-200">
-      Predict demand and eliminate costly waste with AI-powered forecasts.
-    </p>
-  </div>
+        {/* Overlay Gradient */}
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#0f172a]/60 via-[#0f172a]/80 to-[#0f172a]" />
 
-  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition">
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/3176/3176366.png"
-      alt="Profit Analytics"
-      className="w-16 h-16 mx-auto mb-4"
-    />
-    <h3 className="text-xl font-semibold mb-2 text-white">Profit Analytics</h3>
-    <p className="text-gray-200">
-      See which dishes and locations perform best in real time.
-    </p>
-  </div>
-</section>
-{/* Testimonials Section */}
-<section className="relative z-10 mt-32 text-center px-8 max-w-6xl mx-auto">
-  <h2 className="text-4xl font-bold mb-10 text-white animate-fadeInUp">
-    Why Restaurants Love DishFuse
-  </h2>
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Boost Restaurant Profits with AI that Predicts, Plans & Prevents
+            Waste
+          </h1>
+          <p className="text-lg md:text-xl text-gray-200 mb-10">
+            DishFuse helps restaurants increase profit margins, reduce waste, and
+            optimize operations using AI.
+          </p>
+          <a
+            href="#"
+            className="inline-block bg-gradient-to-r from-emerald-400 to-blue-500 text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform duration-300"
+          >
+            Start Free 14-Day Trial
+          </a>
+        </div>
+      </section>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-    {/* Testimonial 1 */}
-    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition duration-300 animate-fadeInUp">
-      <img
-        src="https://randomuser.me/api/portraits/women/44.jpg"
-        alt="Customer 1"
-        className="w-20 h-20 mx-auto rounded-full mb-4 border-2 border-emerald-400"
-      />
-      <p className="italic text-gray-200 mb-4">
-        “DishFuse completely changed how we price our menu. Profits are up 20%!”
-      </p>
-      <h4 className="text-lg font-semibold text-white">— Sarah, Bistro Bella</h4>
-    </div>
+      {/* FEATURES SECTION */}
+      <section className="py-20 bg-[#0f172a] text-center">
+        <h2
+          data-aos="fade-up"
+          className="text-4xl font-bold text-white mb-12"
+        >
+          Why Restaurants Love DishFuse
+        </h2>
 
-    {/* Testimonial 2 */}
-    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition duration-300 animate-fadeInUp delay-200">
-      <img
-        src="https://randomuser.me/api/portraits/men/32.jpg"
-        alt="Customer 2"
-        className="w-20 h-20 mx-auto rounded-full mb-4 border-2 border-blue-400"
-      />
-      <p className="italic text-gray-200 mb-4">
-        “We waste 40% less food now. The AI forecasting is spot on!”
-      </p>
-      <h4 className="text-lg font-semibold text-white">— James, Urban Eats</h4>
-    </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
+          {/* Card 1 */}
+          <div
+            data-aos="fade-up"
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-lg hover:scale-105 transition-transform duration-300"
+          >
+            <span className="text-5xl mb-4 inline-block">🍕</span>
+            <h3 className="text-2xl font-semibold mb-3">AI Menu Pricing</h3>
+            <p className="text-gray-300">
+              Smart pricing insights that increase profits automatically.
+            </p>
+          </div>
 
-    {/* Testimonial 3 */}
-    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition duration-300 animate-fadeInUp delay-300">
-      <img
-        src="https://randomuser.me/api/portraits/men/76.jpg"
-        alt="Customer 3"
-        className="w-20 h-20 mx-auto rounded-full mb-4 border-2 border-indigo-400"
-      />
-      <p className="italic text-gray-200 mb-4">
-        “The profit analytics dashboard shows us exactly where we win.”
-      </p>
-      <h4 className="text-lg font-semibold text-white">— David, GreenLeaf Café</h4>
-    </div>
-  </div>
-</section>
+          {/* Card 2 */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="150"
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-lg hover:scale-105 transition-transform duration-300"
+          >
+            <span className="text-5xl mb-4 inline-block">🏗️</span>
+            <h3 className="text-2xl font-semibold mb-3">Inventory Forecasting</h3>
+            <p className="text-gray-300">
+              Predict demand and eliminate costly waste with AI-powered
+              forecasts.
+            </p>
+          </div>
 
-    </main>
+          {/* Card 3 */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-lg hover:scale-105 transition-transform duration-300"
+          >
+            <span className="text-5xl mb-4 inline-block">📊</span>
+            <h3 className="text-2xl font-semibold mb-3">Profit Analytics</h3>
+            <p className="text-gray-300">
+              See which dishes and locations perform best in real-time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <section className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-center">
+        <h2
+          data-aos="fade-up"
+          className="text-4xl font-bold text-white mb-12"
+        >
+          What Restaurants Are Saying
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
+          <div
+            data-aos="zoom-in"
+            className="bg-white/10 p-8 rounded-2xl border border-white/10 shadow-lg"
+          >
+            <img
+              src="https://randomuser.me/api/portraits/women/44.jpg"
+              alt="User"
+              className="w-16 h-16 rounded-full mx-auto mb-4"
+            />
+            <p className="italic text-gray-300 mb-2">
+              “DishFuse completely changed how we price our menu. Profits are up
+              25% in just two months.”
+            </p>
+            <h4 className="text-white font-semibold">– Maria G.</h4>
+            <p className="text-sm text-gray-400">Restaurant Owner</p>
+          </div>
+
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="150"
+            className="bg-white/10 p-8 rounded-2xl border border-white/10 shadow-lg"
+          >
+            <img
+              src="https://randomuser.me/api/portraits/men/32.jpg"
+              alt="User"
+              className="w-16 h-16 rounded-full mx-auto mb-4"
+            />
+            <p className="italic text-gray-300 mb-2">
+              “We waste 40% less food now. The AI forecasting is spot-on.”
+            </p>
+            <h4 className="text-white font-semibold">– David L.</h4>
+            <p className="text-sm text-gray-400">Head Chef</p>
+          </div>
+
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="300"
+            className="bg-white/10 p-8 rounded-2xl border border-white/10 shadow-lg"
+          >
+            <img
+              src="https://randomuser.me/api/portraits/men/85.jpg"
+              alt="User"
+              className="w-16 h-16 rounded-full mx-auto mb-4"
+            />
+            <p className="italic text-gray-300 mb-2">
+              “The profit analytics dashboard shows us exactly where we win.”
+            </p>
+            <h4 className="text-white font-semibold">– Jason K.</h4>
+            <p className="text-sm text-gray-400">Franchise Manager</p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
+
 
