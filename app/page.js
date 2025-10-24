@@ -65,6 +65,53 @@ export default function Home() {
     </p>
   </div>
 </section>
+{/* Testimonials Section */}
+<section className="relative z-10 mt-32 text-center px-8 max-w-6xl mx-auto">
+  <h2 className="text-4xl font-bold mb-10 text-white animate-fadeInUp">
+    Why Restaurants Love DishFuse
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+    {/* Testimonial 1 */}
+    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition duration-300 animate-fadeInUp">
+      <img
+        src="https://randomuser.me/api/portraits/women/44.jpg"
+        alt="Customer 1"
+        className="w-20 h-20 mx-auto rounded-full mb-4 border-2 border-emerald-400"
+      />
+      <p className="italic text-gray-200 mb-4">
+        “DishFuse completely changed how we price our menu. Profits are up 20%!”
+      </p>
+      <h4 className="text-lg font-semibold text-white">— Sarah, Bistro Bella</h4>
+    </div>
+
+    {/* Testimonial 2 */}
+    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition duration-300 animate-fadeInUp delay-200">
+      <img
+        src="https://randomuser.me/api/portraits/men/32.jpg"
+        alt="Customer 2"
+        className="w-20 h-20 mx-auto rounded-full mb-4 border-2 border-blue-400"
+      />
+      <p className="italic text-gray-200 mb-4">
+        “We waste 40% less food now. The AI forecasting is spot on!”
+      </p>
+      <h4 className="text-lg font-semibold text-white">— James, Urban Eats</h4>
+    </div>
+
+    {/* Testimonial 3 */}
+    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition duration-300 animate-fadeInUp delay-300">
+      <img
+        src="https://randomuser.me/api/portraits/men/76.jpg"
+        alt="Customer 3"
+        className="w-20 h-20 mx-auto rounded-full mb-4 border-2 border-indigo-400"
+      />
+      <p className="italic text-gray-200 mb-4">
+        “The profit analytics dashboard shows us exactly where we win.”
+      </p>
+      <h4 className="text-lg font-semibold text-white">— David, GreenLeaf Café</h4>
+    </div>
+  </div>
+</section>
 
     </main>
   );
