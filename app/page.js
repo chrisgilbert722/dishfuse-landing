@@ -27,6 +27,45 @@ export default function Home() {
           Start Free 14-Day Trial
         </a>
       </div>
+            {/* Feature Section */}
+<section className="relative z-10 mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 px-8 max-w-6xl mx-auto">
+  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png"
+      alt="AI Menu Pricing"
+      className="w-16 h-16 mx-auto mb-4"
+    />
+    <h3 className="text-xl font-semibold mb-2 text-white">AI Menu Pricing</h3>
+    <p className="text-gray-200">
+      Smart pricing insights that increase profits automatically.
+    </p>
+  </div>
+
+  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/4149/4149670.png"
+      alt="Inventory Forecasting"
+      className="w-16 h-16 mx-auto mb-4"
+    />
+    <h3 className="text-xl font-semibold mb-2 text-white">Inventory Forecasting</h3>
+    <p className="text-gray-200">
+      Predict demand and eliminate costly waste with AI-powered forecasts.
+    </p>
+  </div>
+
+  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:scale-105 transition">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/3176/3176366.png"
+      alt="Profit Analytics"
+      className="w-16 h-16 mx-auto mb-4"
+    />
+    <h3 className="text-xl font-semibold mb-2 text-white">Profit Analytics</h3>
+    <p className="text-gray-200">
+      See which dishes and locations perform best in real time.
+    </p>
+  </div>
+</section>
+
     </main>
   );
 }
