@@ -5,7 +5,7 @@ import React from "react";
 export default function Home() {
   return (
     <>
-      {/* HERO SECTION — Video 1 */}
+      {/* === HERO SECTION — Video 1 === */}
       <section className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden">
         <video
           autoPlay
@@ -19,15 +19,15 @@ export default function Home() {
             type="video/mp4"
           />
         </video>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#0f172a]/70 via-[#0f172a]/90 to-[#0f172a]" />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/70 via-[#0f172a]/80 to-[#0f172a]" />
         <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Boost Restaurant Profits with AI that Predicts, Plans & Prevents
-            Waste
+            Boost Restaurant Profits with AI that Predicts, Plans & Prevents Waste
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-10">
             DishFuse helps restaurants increase profit margins, reduce waste, and
-            optimize operations using advanced AI.
+            optimize operations using AI.
           </p>
           <a
             href="#pricing"
@@ -38,8 +38,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURES SECTION */}
-      <section className="py-20 bg-[#0f172a] text-center">
+      {/* === FEATURES SECTION === */}
+      <section id="features" className="py-20 bg-[#0f172a] text-center">
         <h2 className="text-4xl font-bold text-white mb-12">
           Why Restaurants Love DishFuse
         </h2>
@@ -73,8 +73,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS SECTION */}
-      <section className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-center">
+      {/* === TESTIMONIALS SECTION === */}
+      <section
+        id="testimonials"
+        className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-center"
+      >
         <h2 className="text-4xl font-bold text-white mb-12">
           What Restaurants Are Saying
         </h2>
@@ -95,7 +98,7 @@ export default function Home() {
             {
               img: "https://randomuser.me/api/portraits/men/85.jpg",
               quote:
-                "The analytics dashboard shows us exactly where we win and where we can improve.",
+                "The profit analytics dashboard shows us exactly where we win.",
               name: "David, GreenLeaf Café",
             },
           ].map((t, i) => (
@@ -115,20 +118,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRICING SECTION */}
+      {/* === PRICING SECTION === */}
       <section
         id="pricing"
         className="py-20 bg-[#0f172a] text-center border-t border-white/10"
       >
-        <h2 className="text-4xl font-bold text-white mb-12">
-          Choose Your Plan
-        </h2>
+        <h2 className="text-4xl font-bold text-white mb-12">Choose Your Plan</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
           {[
             {
               name: "Starter",
               price: "$99/mo",
-              desc: "Perfect for single-location restaurants looking to optimize profitability.",
+              desc: "Perfect for small restaurants just getting started.",
               features: [
                 "AI Menu Insights",
                 "Basic Analytics Dashboard",
@@ -138,7 +139,7 @@ export default function Home() {
             {
               name: "Pro",
               price: "$199/mo",
-              desc: "For restaurants ready to scale and maximize efficiency.",
+              desc: "Ideal for growing restaurants that want deeper insights.",
               features: [
                 "All Starter Features",
                 "Inventory Forecasting",
@@ -149,7 +150,7 @@ export default function Home() {
             {
               name: "Enterprise",
               price: "Custom",
-              desc: "Tailored for multi-location and franchise-level operations.",
+              desc: "For large restaurant chains with custom needs.",
               features: [
                 "All Pro Features",
                 "Dedicated Account Manager",
@@ -188,8 +189,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT SECTION — Video 2 */}
-      <section className="relative py-24 text-center text-white overflow-hidden">
+      {/* === CONTACT SECTION — Video 2 === */}
+      <section id="contact" className="relative py-24 text-center text-white overflow-hidden">
         <video
           autoPlay
           loop
@@ -202,12 +203,11 @@ export default function Home() {
             type="video/mp4"
           />
         </video>
-        <div className="absolute top-0 left-0 w-full h-full bg-black/60" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-4xl font-bold mb-6">Book a Demo or Get in Touch</h2>
           <p className="text-gray-200 mb-10">
-            Have questions? Let our AI experts show you how DishFuse can
-            transform your restaurant operations.
+            Have questions? Let our AI experts show you how DishFuse can transform your restaurant.
           </p>
           <form className="space-y-4">
             <input
@@ -236,3 +236,4 @@ export default function Home() {
     </>
   );
 }
+
