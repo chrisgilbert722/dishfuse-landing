@@ -1,20 +1,24 @@
+import './globals.css';
+
 export const metadata = {
-  title: "DishFuse | AI Restaurant Profit Optimizer",
-  description: "Boost restaurant profits with AI that predicts, plans, and prevents waste."
+  title: 'DishFuse | AI Restaurant Profit Optimizer',
+  description: 'Boost restaurant profits with AI that predicts, plans, and prevents waste.',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, fontFamily: 'Inter, sans-serif', backgroundColor: '#f9f9f9' }}>
-        <header style={{ padding: '20px', backgroundColor: '#00BFA5', color: 'white', textAlign: 'center' }}>
-          <h2>DishFuse</h2>
+      <body>
+        <header style={{ padding: '20px', backgroundColor: '#00bfa5', color: 'white', textAlign: 'center' }}>
+          <h1>DishFuse</h1>
         </header>
 
-        <main>{children}</main>
+        <main style={{ padding: '40px', maxWidth: '900px', margin: '0 auto' }}>
+          {children}
+        </main>
 
-        <footer style={{ textAlign: 'center', padding: '20px', backgroundColor: '#001f1f', color: '#fff', marginTop: '40px' }}>
-          <p>© 2025 DishFuse. All rights reserved.</p>
+        <footer style={{ padding: '20px', textAlign: 'center' }}>
+          © {new Date().getFullYear()} DishFuse. All rights reserved.
         </footer>
       </body>
     </html>
