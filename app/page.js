@@ -5,7 +5,7 @@ import React from "react";
 export default function Home() {
   return (
     <>
-      {/* === HERO SECTION — Video 1 === */}
+      {/* HERO SECTION — Video 1 */}
       <section className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden">
         <video
           autoPlay
@@ -19,15 +19,18 @@ export default function Home() {
             type="video/mp4"
           />
         </video>
-
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/70 via-[#0f172a]/80 to-[#0f172a]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/70 via-[#0f172a]/90 to-[#0f172a]" />
         <div className="relative z-10 max-w-3xl mx-auto px-6">
+          <img
+            src="/images/dishfuse-logo-gold.png"
+            alt="DishFuse Logo"
+            className="mx-auto w-20 h-20 mb-6"
+          />
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Boost Restaurant Profits with AI that Predicts, Plans & Prevents Waste
+            Boost Restaurant Profits with <span className="text-emerald-400">AI</span> That Thinks Ahead
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-10">
-            DishFuse helps restaurants increase profit margins, reduce waste, and
-            optimize operations using AI.
+            DishFuse helps restaurants increase profits, reduce waste, and run smarter — powered by AI.
           </p>
           <a
             href="#pricing"
@@ -38,27 +41,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === FEATURES SECTION === */}
-      <section id="features" className="py-20 bg-[#0f172a] text-center">
+      {/* FEATURES SECTION */}
+      <section className="py-20 bg-[#0f172a] text-center">
         <h2 className="text-4xl font-bold text-white mb-12">
-          Why Restaurants Love DishFuse
+          Why Restaurants Choose DishFuse
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
           {[
             {
-              emoji: "🍕",
+              emoji: "💡",
               title: "AI Menu Pricing",
-              text: "Smart pricing insights that increase profits automatically.",
+              text: "Maximize profits automatically with real-time smart pricing suggestions.",
             },
             {
-              emoji: "🏗️",
+              emoji: "📦",
               title: "Inventory Forecasting",
-              text: "Predict demand and eliminate costly waste with AI-powered forecasts.",
+              text: "Predict stock levels and reduce costly waste using AI demand modeling.",
             },
             {
               emoji: "📊",
               title: "Profit Analytics",
-              text: "See which dishes and locations perform best in real-time.",
+              text: "View performance dashboards for every dish and location — instantly.",
             },
           ].map((card, i) => (
             <div
@@ -73,32 +76,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === TESTIMONIALS SECTION === */}
-      <section
-        id="testimonials"
-        className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-center"
-      >
+      {/* TESTIMONIALS SECTION */}
+      <section className="py-20 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-center">
         <h2 className="text-4xl font-bold text-white mb-12">
-          What Restaurants Are Saying
+          What Restaurant Owners Are Saying
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
           {[
             {
               img: "https://randomuser.me/api/portraits/women/44.jpg",
               quote:
-                "DishFuse completely changed how we price our menu. Profits are up 20%!",
+                "DishFuse changed our pricing strategy overnight — profits are up 22%.",
               name: "Sarah, Bistro Bella",
             },
             {
               img: "https://randomuser.me/api/portraits/men/32.jpg",
               quote:
-                "We waste 40% less food now. The AI forecasting is spot on!",
+                "We cut our food waste in half. The AI forecasting is shockingly accurate.",
               name: "James, Urban Eats",
             },
             {
               img: "https://randomuser.me/api/portraits/men/85.jpg",
               quote:
-                "The profit analytics dashboard shows us exactly where we win.",
+                "I check DishFuse every morning — it’s like having a full-time analyst for my restaurant.",
               name: "David, GreenLeaf Café",
             },
           ].map((t, i) => (
@@ -118,28 +118,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === PRICING SECTION === */}
-      <section
-        id="pricing"
-        className="py-20 bg-[#0f172a] text-center border-t border-white/10"
-      >
+      {/* AI CHAT SIMULATION SECTION */}
+      <section className="py-24 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-center text-white">
+        <h2 className="text-4xl font-bold mb-12">See DishFuse AI in Action</h2>
+        <div className="max-w-3xl mx-auto bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl p-8 shadow-xl text-left relative">
+          <div className="mb-6">
+            <p className="text-emerald-400 font-semibold mb-2">🍽️ Restaurant Owner:</p>
+            <p className="text-gray-200 italic">
+              “Hey DishFuse, we’re wasting too many ingredients every week — how can we fix it?”
+            </p>
+          </div>
+          <div className="mb-6">
+            <p className="text-blue-400 font-semibold mb-2">🤖 DishFuse AI:</p>
+            <div className="animate-pulse">
+              <p className="text-gray-100">
+                “Analyzing your menu and sales data...”
+              </p>
+              <p className="text-gray-100 mt-2">
+                “Recommendation: Reduce your ‘Signature Pasta’ batch by 18% on weekdays. You’ll save
+                <span className="text-emerald-400 font-semibold"> $750/month</span> in ingredient costs.”
+              </p>
+            </div>
+          </div>
+          <div>
+            <p className="text-blue-400 font-semibold mb-2">🤖 DishFuse AI:</p>
+            <p className="text-gray-100">
+              “Your best-selling dish this week is the Spicy Tuna Roll 🍣 — profit margin
+              increased by <span className="text-emerald-400 font-semibold">12%</span> using AI pricing.”
+            </p>
+          </div>
+          <div className="absolute top-4 right-4 text-xs text-gray-400">Live AI Demo</div>
+        </div>
+        <p className="text-gray-400 mt-8">
+          *DishFuse AI constantly learns from your menu, sales, and inventory to increase profits.*
+        </p>
+      </section>
+
+      {/* PRICING SECTION */}
+      <section id="pricing" className="py-20 bg-[#0f172a] text-center border-t border-white/10">
         <h2 className="text-4xl font-bold text-white mb-12">Choose Your Plan</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
           {[
             {
               name: "Starter",
               price: "$99/mo",
-              desc: "Perfect for small restaurants just getting started.",
+              desc: "For small restaurants ready to grow with AI insights.",
               features: [
-                "AI Menu Insights",
-                "Basic Analytics Dashboard",
+                "AI Menu Recommendations",
+                "Basic Performance Analytics",
                 "Email Support",
               ],
             },
             {
               name: "Pro",
               price: "$199/mo",
-              desc: "Ideal for growing restaurants that want deeper insights.",
+              desc: "Best for expanding restaurants needing full automation.",
               features: [
                 "All Starter Features",
                 "Inventory Forecasting",
@@ -150,7 +183,7 @@ export default function Home() {
             {
               name: "Enterprise",
               price: "Custom",
-              desc: "For large restaurant chains with custom needs.",
+              desc: "Tailored AI solutions for chains and franchises.",
               features: [
                 "All Pro Features",
                 "Dedicated Account Manager",
@@ -189,8 +222,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === CONTACT SECTION — Video 2 === */}
-      <section id="contact" className="relative py-24 text-center text-white overflow-hidden">
+      {/* CONTACT SECTION — Video 2 */}
+      <section className="relative py-24 text-center text-white overflow-hidden" id="contact">
         <video
           autoPlay
           loop
@@ -207,7 +240,8 @@ export default function Home() {
         <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-4xl font-bold mb-6">Book a Demo or Get in Touch</h2>
           <p className="text-gray-200 mb-10">
-            Have questions? Let our AI experts show you how DishFuse can transform your restaurant.
+            Have questions? Let our AI experts show you how DishFuse can
+            transform your restaurant operations.
           </p>
           <form className="space-y-4">
             <input
