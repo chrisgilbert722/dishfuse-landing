@@ -210,18 +210,13 @@ transform: translateY(0);
 {/* HEADER */}
 <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(11,18,34,0.72)] backdrop-blur-md">
 <div className="container flex items-center justify-between py-4">
-<div className="flex items-center gap-3">
+{/* Single Logo Only */}
 <img
-src={LOGO_MARK}
-alt="DishFuse logo mark"
-className="h-9 w-9 logoGlow"
+src="/logo-header.png"
+alt="DishFuse logo"
+className="h-10 w-auto logoGlow"
 />
-<img
-src={LOGO_WORD}
-alt="DishFuse"
-className="h-5 md:h-6 logoGlow"
-/>
-</div>
+
 <nav className="hidden md:flex items-center gap-14 text-sm text-white/80">
 <a href="#features" className="hover:text-white">Features</a>
 <a href="#pricing" className="hover:text-white">Pricing</a>
