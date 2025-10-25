@@ -34,10 +34,10 @@ const heroRef = useRef(null);
 useEffect(() => {
 setMounted(true);
 // Sequenced chat animation
-const t1 = setTimeout(() => setChatStep(1), 1200);
-const t2 = setTimeout(() => setChatStep(2), 2600);
-const t3 = setTimeout(() => setChatStep(3), 4200);
-const t4 = setTimeout(() => setChatStep(4), 6200);
+cconst t1 = setTimeout(() => setChatStep(1), 3000);
+const t2 = setTimeout(() => setChatStep(2), 7000);
+const t3 = setTimeout(() => setChatStep(3), 11000);
+const t4 = setTimeout(() => setChatStep(4), 16000);
 return () => {
 clearTimeout(t1);
 clearTimeout(t2);
