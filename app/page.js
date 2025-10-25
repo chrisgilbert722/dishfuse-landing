@@ -342,10 +342,16 @@ autoPlay
 muted
 loop
 playsInline
-style={{ filter: "brightness(1.1) contrast(1.08)", transition: "filter 0.4s ease" }}
+style={{
+filter: "brightness(1.1) contrast(1.08)",
+transition: "filter 0.4s ease",
+}}
 className="absolute inset-0 w-full h-full object-cover opacity-25"
 >
-<source src="https://cdn.coverr.co/videos/coverr-slicing-fresh-vegetables-1831/1080p.mp4" type="video/mp4" />
+<source
+src="https://cdn.coverr.co/videos/coverr-slicing-fresh-vegetables-1831/1080p.mp4"
+type="video/mp4"
+/>
 </video>
 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B1222]/70 to-[#0B1222]" />
 
