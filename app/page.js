@@ -330,17 +330,16 @@ e: "⚠️",
 </div>
 </section>
 
-{/* LIVE CHAT DEMO – Video 2 background */}
-<section id="demo" className="relative section overflow-hidden">
+{/* CHAT VIDEO */}
 <video
 autoPlay
 muted
 loop
 playsInline
-className="absolute inset-0 w-full h-full object-cover opacity-20"
+style={{ filter: "brightness(1.1) contrast(1.08)", transition: "filter 0.4s ease" }}
+className="absolute inset-0 w-full h-full object-cover opacity-25"
 >
-<source src="/chat.mp4" type="video/mp4" />
-<source src={CHAT_FALLBACK} type="video/mp4" />
+<source src="https://cdn.coverr.co/videos/coverr-slicing-fresh-vegetables-1831/1080p.mp4" type="video/mp4" />
 </video>
 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B1222]/70 to-[#0B1222]" />
 
