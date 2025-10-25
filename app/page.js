@@ -17,8 +17,8 @@ import React, { useEffect, useRef, useState } from "react";
 * - /chat.mp4
 */
 
-const LOGO_MARK = "/dishfuse-mark-gold.svg";
-const LOGO_WORD = "/dishfuse-wordmark-gold.svg";
+const LOGO_MARK = "/logo-header.png";
+const LOGO_WORD = "/logo-footer.png";
 
 // External fallbacks so the page never looks broken if local videos aren't there yet
 const HERO_FALLBACK =
