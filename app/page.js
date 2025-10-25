@@ -235,10 +235,16 @@ autoPlay
 muted
 loop
 playsInline
-style={{ filter: "brightness(1.15) contrast(1.05)", transition: "filter 0.4s ease" }}
+style={{
+filter: "brightness(1.15) contrast(1.05)",
+transition: "filter 0.4s ease",
+}}
 className="absolute inset-0 w-full h-full object-cover opacity-40"
 >
-<source src="https://cdn.coverr.co/videos/coverr-chef-preparing-food-in-the-kitchen-1080p.mp4" type="video/mp4" />
+<source
+src="https://cdn.coverr.co/videos/coverr-chef-preparing-food-in-the-kitchen-1080p.mp4"
+type="video/mp4"
+/>
 </video>
 
 <div className="absolute inset-0 bg-[radial-gradient(1000px_400px_at_70%_-10%,rgba(244,199,98,0.18),transparent)]" />
