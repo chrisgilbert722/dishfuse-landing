@@ -24,8 +24,7 @@ type: "website",
 twitter: {
 card: "summary_large_image",
 title: "DishFuse — AI for Restaurant Profit",
-description:
-"Increase margins, predict inventory, reduce waste with AI.",
+description: "Increase margins, predict inventory, reduce waste with AI.",
 images: ["/logo-footer.png"],
 },
 icons: {
@@ -33,7 +32,7 @@ icon: "/favicon.png",
 },
 };
 
-// Optional analytics IDs (fill in later)
+// Optional analytics IDs (you can fill in later)
 const GA_ID = ""; // e.g. "G-XXXXXXXXXX"
 const FB_PIXEL_ID = ""; // e.g. "123456789012345"
 
@@ -114,7 +113,10 @@ reviewRating: { "@type": "Rating", ratingValue: "5" },
 {/* Google Analytics */}
 {GA_ID && (
 <>
-<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+<script
+async
+src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+/>
 <script
 dangerouslySetInnerHTML={{
 __html: `
@@ -128,7 +130,7 @@ gtag('config', '${GA_ID}');
 </>
 )}
 
-{/* Meta Pixel */}
+{/* Meta (Facebook) Pixel */}
 {FB_PIXEL_ID && (
 <>
 <script
@@ -175,3 +177,4 @@ padding: 0,
 </html>
 );
 }
+	
