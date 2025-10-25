@@ -1,4 +1,4 @@
-mport "./globals.css";
+import "./globals.css";
 
 export const metadata = {
 title: "DishFuse — AI that turns food costs into predictable profit",
@@ -175,5 +175,3 @@ padding: 0,
 </html>
 );
 }
-	
-
