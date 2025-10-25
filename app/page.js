@@ -513,7 +513,7 @@ MOST POPULAR
 <section id="cta" className="section">
 <div className="container">
 <div className="glass rounded-3xl p-10 md:p-14 text-center">
-{/* Removed the logo since favicon already covers it */}
+{/* Removed the logo since favicon handles branding */}
 <h3 className="h2 mb-3">Ready to see hidden profit?</h3>
 <p className="lead mb-7">
 Join restaurants using DishFuse to boost margins and cut waste with AI.
@@ -524,6 +524,7 @@ Start Free 14-Day Trial
 </div>
 </div>
 </section>
+	
 
 {/* FOOTER */}
 <footer className="border-t border-white/10 py-10 bg-[#0A1120]">
