@@ -1,4 +1,6 @@
 export default function robots() {
+const baseUrl = "https://dishfuse.com";
+
 return {
 rules: [
 {
@@ -6,6 +8,7 @@ userAgent: "*",
 allow: "/",
 },
 ],
-sitemap: "https://dishfuse.com/sitemap.xml",
+sitemap: `${baseUrl}/sitemap.xml`,
 };
 }
+	
