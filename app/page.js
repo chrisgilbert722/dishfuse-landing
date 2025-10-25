@@ -4,60 +4,38 @@ import React, { useEffect, useRef, useState } from "react";
 
 /**
 * DishFuse — High-converting Landing (Navy + Gold)
-* - Two full-screen autoplay videos (hero + chat demo)
-* - Chef Maria × DishFuse AI animated chat (slower cadence)
+* - Autoplay videos (hero + chat demo), CDN first with local fallback
+* - Chef Maria × DishFuse AI simulated chat (slowed timing)
 * - Pricing: $99 / $199 / Custom
-* - Real-look testimonial carousel (auto-loop)
-* - Robust video autoplay fixes incl. Safari/iOS
+* - Uses your existing logos in /public: /logo-header.png and /logo-footer.png
 */
 
 const LOGO_HEADER = "/logo-header.png";
 const LOGO_FOOTER = "/logo-footer.png";
 
-// External fallbacks so page never looks broken if local videos aren't there yet
-const HERO_FALLBACK =
+// CDN-first sources (fast, cross-browser), local fallback second
+const HERO_CDN =
 "https://cdn.coverr.co/videos/coverr-chef-preparing-food-in-the-kitchen-1080p.mp4";
-const CHAT_FALLBACK =
+const CHAT_CDN =
 "https://cdn.coverr.co/videos/coverr-slicing-fresh-vegetables-1831/1080p.mp4";
 
 export default function Home() {
 const [chatStep, setChatStep] = useState(0);
 const [mounted, setMounted] = useState(false);
 
-const heroRef = useRef(null);
-const chatRef = useRef(null);
-
-// Slower, more natural chat timing
 useEffect(() => {
 setMounted(true);
+// Slower, more natural sequencing
 const t1 = setTimeout(() => setChatStep(1), 3000);
 const t2 = setTimeout(() => setChatStep(2), 7000);
 const t3 = setTimeout(() => setChatStep(3), 11000);
 const t4 = setTimeout(() => setChatStep(4), 16000);
-return () => [t1, t2, t3, t4].forEach(clearTimeout);
-}, []);
-
-// Cross-browser autoplay reliability
-useEffect(() => {
-const vids = [heroRef.current, chatRef.current].filter(Boolean);
-vids.forEach((v) => {
-try {
-// mobile Safari hints
-v.setAttribute("muted", "");
-v.setAttribute("playsinline", "");
-v.muted = true;
-v.playsInline = true;
-// attempt play
-const p = v.play();
-if (p && typeof p.catch === "function") {
-p.catch(() => {
-// if blocked, try load() then play()
-v.load?.();
-v.play?.().catch(() => {});
-});
-}
-} catch {}
-});
+return () => {
+clearTimeout(t1);
+clearTimeout(t2);
+clearTimeout(t3);
+clearTimeout(t4);
+};
 }, []);
 
 return (
@@ -192,7 +170,6 @@ linear-gradient(160deg, #0f1a33, #0b1222);
 .logoGlow {
 filter: drop-shadow(0 0 22px rgba(244, 199, 98, 0.35));
 }
-/* Chat bubbles */
 .bubble {
 max-width: 540px;
 padding: 14px 16px;
@@ -218,26 +195,13 @@ opacity: 1;
 transform: translateY(0);
 }
 }
-
-/* Testimonial carousel */
-.carousel {
-display: flex;
-gap: 18px;
-will-change: transform;
-animation: slide 28s linear infinite;
-}
-.carousel:hover { animation-play-state: paused; }
-@keyframes slide {
-0% { transform: translateX(0); }
-100% { transform: translateX(-50%); }
-}
 `}</style>
 
 {/* HEADER */}
 <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(11,18,34,0.72)] backdrop-blur-md">
 <div className="container flex items-center justify-between py-4">
-{/* Single header logo */}
-<img src={LOGO_HEADER} alt="DishFuse" className="h-10 w-auto logoGlow" />
+{/* Single logo */}
+<img src={LOGO_HEADER} alt="DishFuse logo" className="h-10 w-auto logoGlow" />
 <nav className="hidden md:flex items-center gap-14 text-sm text-white/80">
 <a href="#features" className="hover:text-white">Features</a>
 <a href="#pricing" className="hover:text-white">Pricing</a>
@@ -254,18 +218,17 @@ animation: slide 28s linear infinite;
 {/* HERO — Video 1 */}
 <section className="relative min-h-[84vh] flex items-center overflow-hidden" aria-label="DishFuse Kitchen Hero">
 <video
-ref={heroRef}
 autoPlay
 muted
 loop
 playsInline
 preload="auto"
-poster="/logo-footer.png"
-className="absolute inset-0 w-full h-full object-cover opacity-35"
+poster="/poster-hero.jpg"
+className="absolute inset-0 w-full h-full object-cover opacity-40"
 style={{ filter: "brightness(1.15) contrast(1.05)" }}
 >
-{/* Fallback first (per your request), then local */}
-<source src={HERO_FALLBACK} type="video/mp4" />
+{/* CDN first, local fallback second */}
+<source src={HERO_CDN} type="video/mp4" />
 <source src="/hero.mp4" type="video/mp4" />
 </video>
 
@@ -281,7 +244,8 @@ style={{ filter: "brightness(1.15) contrast(1.05)" }}
 Turn food costs into <span style={{ color: "var(--gold)" }}>predictable profit</span>
 </h1>
 <p className="lead mb-8">
-DishFuse uses AI to price your menu, forecast inventory, and cut waste—so you increase margins without working longer hours.
+DishFuse uses AI to price your menu, forecast inventory, and cut waste—so you increase
+margins without working longer hours.
 </p>
 <div className="flex flex-wrap gap-12 items-center">
 <a href="#pricing" className="btn btn-primary">Start Free 14-Day Trial</a>
@@ -294,7 +258,7 @@ DishFuse uses AI to price your menu, forecast inventory, and cut waste—so you 
 </div>
 </div>
 
-{/* KPI right card */}
+{/* KPI card */}
 <div className="glass rounded-2xl p-5 md:p-6">
 <div className="grid grid-3 grid-cols-1 md:grid-cols-3 gap-4">
 {[
@@ -303,7 +267,9 @@ DishFuse uses AI to price your menu, forecast inventory, and cut waste—so you 
 { k: "5 min", d: "Weekly ordering" },
 ].map((x) => (
 <div key={x.d} className="card text-center">
-<div className="text-2xl font-extrabold" style={{ color: "var(--gold)" }}>{x.k}</div>
+<div className="text-2xl font-extrabold" style={{ color: "var(--gold)" }}>
+{x.k}
+</div>
 <div className="text-white/75 text-sm">{x.d}</div>
 </div>
 ))}
@@ -324,9 +290,21 @@ Price each dish to target margin, predict next week’s buy list, and stop losse
 </p>
 <div className="grid grid-3">
 {[
-{ t: "AI Menu Pricing", p: "Dynamic suggestions by dish & daypart to hit your target margins.", e: "💹" },
-{ t: "Inventory Forecasting", p: "Predict SKUs by the day to avoid 86s and over-ordering.", e: "📦" },
-{ t: "Waste Prevention Alerts", p: "Real-time flags for expiring items and anomalies.", e: "⚠️" },
+{
+t: "AI Menu Pricing",
+p: "Dynamic suggestions by dish & daypart to hit your target margins.",
+e: "💹",
+},
+{
+t: "Inventory Forecasting",
+p: "Predict SKUs by the day to avoid 86s and over-ordering.",
+e: "📦",
+},
+{
+t: "Waste Prevention Alerts",
+p: "Real-time flags for expiring items and anomalies.",
+e: "⚠️",
+},
 ].map((f) => (
 <div key={f.t} className="card">
 <div className="text-4xl mb-3">{f.e}</div>
@@ -338,20 +316,20 @@ Price each dish to target margin, predict next week’s buy list, and stop losse
 </div>
 </section>
 
-{/* LIVE CHAT DEMO — Video 2 */}
+{/* LIVE CHAT DEMO — Video 2 background */}
 <section id="demo" className="relative section overflow-hidden">
 <video
-ref={chatRef}
 autoPlay
 muted
 loop
 playsInline
 preload="auto"
-poster="/logo-footer.png"
-className="absolute inset-0 w-full h-full object-cover opacity-22"
+poster="/poster-chat.jpg"
+className="absolute inset-0 w-full h-full object-cover opacity-25"
 style={{ filter: "brightness(1.1) contrast(1.08)" }}
 >
-<source src={CHAT_FALLBACK} type="video/mp4" />
+{/* CDN first, local fallback */}
+<source src={CHAT_CDN} type="video/mp4" />
 <source src="/chat.mp4" type="video/mp4" />
 </video>
 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B1222]/70 to-[#0B1222]" />
@@ -361,7 +339,6 @@ style={{ filter: "brightness(1.1) contrast(1.08)" }}
 <p className="lead mb-8">See how owners get answers in seconds.</p>
 
 <div className="grid md:grid-cols-2 gap-18 items-start">
-{/* Simulated chat */}
 <div className="glass rounded-2xl p-6">
 <div className="flex items-center gap-3 mb-4">
 <div className="pulse-dot" />
@@ -388,8 +365,9 @@ Great — how much mozzarella should I order?
 )}
 {chatStep >= 3 && (
 <div className="bubble ai" style={{ animationDelay: "0.5s" }} aria-live="polite">
-Forecast is <b style={{ color: "var(--gold)" }}>18.4 lbs</b> for 7 days. I’ll add a buffer of 8% for
-Sunday brunch rush → <b style={{ color: "var(--gold)" }}>19.9 lbs</b>.
+Forecast is <b style={{ color: "var(--gold)" }}>18.4 lbs</b> for 7 days.
+I’ll add a buffer of 8% for Sunday brunch rush →{" "}
+<b style={{ color: "var(--gold)" }}>19.9 lbs</b>.
 </div>
 )}
 {chatStep >= 4 && (
@@ -420,32 +398,72 @@ Want me to generate a pre-approved buy list and push to your vendor?
 </div>
 </section>
 
-{/* TESTIMONIALS — Modern Card Carousel */}
-<section id="results" className="section bg-[#0A1120] border-t border-white/10">
+{/* TESTIMONIALS (rounded rectangles, high-cred) */}
+<section id="results" className="section">
 <div className="container">
-<h2 className="h2 mb-2">What restaurants are saying</h2>
-<p className="lead mb-8">Real operators. Real profit lifts. Real waste reduction.</p>
+<h2 className="h2 mb-3">What restaurant owners are saying</h2>
+<p className="lead mb-10">Proof from real kitchens using AI to protect margins.</p>
 
-{/* We duplicate the list to create a seamless infinite loop */}
-<div className="overflow-hidden rounded-2xl border border-white/10 glass p-4">
-<div className="carousel">
-{[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
-<div
-key={i}
-className="min-w-[280px] max-w-[280px] bg-white/5 border border-white/10 rounded-xl p-5"
->
-<div className="flex items-center gap-3 mb-3">
-<img src={t.img} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+<div className="grid grid-3">
+{[
+{
+img: "https://randomuser.me/api/portraits/women/44.jpg",
+name: "Chef Maria Thompson",
+role: "Owner, Bella Forno",
+quote:
+"DishFuse cut our waste by nearly 40%. Pricing confidence went way up and so did margins.",
+},
+{
+img: "https://randomuser.me/api/portraits/men/32.jpg",
+name: "James Carter",
+role: "GM, Bistro 21",
+quote:
+"Inventory forecasts are spot on. Ordering takes minutes and we avoid 86s on busy nights.",
+},
+{
+img: "https://randomuser.me/api/portraits/women/65.jpg",
+name: "Lena Ortiz",
+role: "Owner, Café Luna",
+quote:
+"Finally see which dishes actually make money. We adjusted prices and margins stabilized fast.",
+},
+{
+img: "https://randomuser.me/api/portraits/men/12.jpg",
+name: "Andre Nguyen",
+role: "Owner, Saigon Social",
+quote:
+"The waste alerts alone paid for the subscription in the first month.",
+},
+{
+img: "https://randomuser.me/api/portraits/women/21.jpg",
+name: "Priya Sharma",
+role: "Operator, Spice Lane",
+quote:
+"We used data to push weekend pricing gracefully—customers were happy and so were margins.",
+},
+{
+img: "https://randomuser.me/api/portraits/men/85.jpg",
+name: "David Romero",
+role: "Owner, GreenLeaf Café",
+quote:
+"Clear reporting, simple actions. It’s like a profit coach built into our workflow.",
+},
+].map((t) => (
+<div key={t.name} className="glass rounded-2xl p-6 border border-white/10">
+<div className="flex items-center gap-4 mb-4">
+<img
+src={t.img}
+alt={t.name}
+className="w-14 h-14 rounded-2xl object-cover"
+/>
 <div>
-<div className="font-semibold">{t.name}</div>
-<div className="text-xs text-white/70">{t.role}</div>
+<div className="font-bold">{t.name}</div>
+<div className="text-white/70 text-sm">{t.role}</div>
 </div>
 </div>
-<div className="text-yellow-300 mb-2">{"★".repeat(t.stars)}{"☆".repeat(5 - t.stars)}</div>
-<p className="text-white/85 text-sm">“{t.quote}”</p>
+<p className="text-white/85">“{t.quote}”</p>
 </div>
 ))}
-</div>
 </div>
 </div>
 </section>
@@ -488,7 +506,7 @@ style={{
 background: "linear-gradient(135deg,var(--gold),var(--gold-2))",
 display: "inline-block",
 padding: "6px 12px",
-borderRadius: 999
+borderRadius: 999,
 }}
 >
 MOST POPULAR
@@ -542,57 +560,4 @@ Join restaurants using DishFuse to boost margins and cut waste with AI.
 </main>
 );
 }
-
-/* --- Testimonial data (real-looking headshots) --- */
-const TESTIMONIALS = [
-{
-img: "https://randomuser.me/api/portraits/women/44.jpg",
-name: "Chef Maria Thompson",
-role: "Owner, Bella Forno",
-stars: 5,
-quote:
-"DishFuse took the guesswork out of pricing and ordering. We cut waste ~40% and finally hit our target margins."
-},
-{
-img: "https://randomuser.me/api/portraits/men/32.jpg",
-name: "James Carter",
-role: "GM, Bistro 21",
-stars: 5,
-quote:
-"Inventory forecasting is scarily accurate. Ordering time is down to minutes and we stopped over-buying."
-},
-{
-img: "https://randomuser.me/api/portraits/women/68.jpg",
-name: "Lena Ortiz",
-role: "Owner, Café Luna",
-stars: 5,
-quote:
-"Profit analytics showed exactly which dishes drive money. We re-priced 9 items and saw a fast lift."
-},
-{
-img: "https://randomuser.me/api/portraits/men/85.jpg",
-name: "David Nguyen",
-role: "Ops, GreenLeaf Café",
-stars: 5,
-quote:
-"The AI suggestions feel like a seasoned analyst in my pocket. It paid for itself in the first month."
-},
-{
-img: "https://randomuser.me/api/portraits/women/12.jpg",
-name: "Priya Desai",
-role: "Owner, Tandoori House",
-stars: 5,
-quote:
-"86s are basically gone. Waste alerts + demand forecasting = smooth weekend service."
-},
-{
-img: "https://randomuser.me/api/portraits/men/71.jpg",
-name: "Aaron Blake",
-role: "Chef/Owner, Smoke & Ember",
-stars: 5,
-quote:
-"Finally a tool built for kitchens. We price confidently and order exactly what we need—no more hunches."
-}
-];
 	
-
