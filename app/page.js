@@ -229,24 +229,16 @@ className="h-10 w-auto logoGlow"
 </div>
 </div>
 </header>
-
-{/* HERO – Video 1 */}
-<section
-ref={heroRef}
-className="relative min-h-[84vh] flex items-center overflow-hidden"
-aria-label="DishFuse Kitchen Hero"
->
+{/* HERO VIDEO */}
 <video
 autoPlay
 muted
 loop
 playsInline
-className="absolute inset-0 w-full h-full object-cover opacity-35"
+style={{ filter: "brightness(1.15) contrast(1.05)", transition: "filter 0.4s ease" }}
+className="absolute inset-0 w-full h-full object-cover opacity-40"
 >
-{/* Local first */}
-<source src="/hero.mp4" type="video/mp4" />
-{/* Fallback */}
-<source src={HERO_FALLBACK} type="video/mp4" />
+<source src="https://cdn.coverr.co/videos/coverr-chef-preparing-food-in-the-kitchen-1080p.mp4" type="video/mp4" />
 </video>
 
 <div className="absolute inset-0 bg-[radial-gradient(1000px_400px_at_70%_-10%,rgba(244,199,98,0.18),transparent)]" />
