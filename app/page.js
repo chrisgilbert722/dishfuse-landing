@@ -4,12 +4,13 @@ import React, { useEffect, useState, useRef } from "react";
 
 /**
  * DishFuse — High-converting Landing (Navy + Gold)
- * Upgrades in this version:
- * - Lighter navy gradient background (premium, not black)
- * - Gold glow behind header logo + CTA buttons (highest converting)
- * - Brighter video overlays for mobile clarity
- * - Mobile 720p video swap for faster loads
- * - Lazy-load images; inline SVG trust badges (AWS, Stripe, Security, AI, Support)
+ * This build includes:
+ * - Lighter navy gradient background
+ * - Gold glow behind header logo + all CTA buttons
+ * - Brighter video overlays (mobile-friendly)
+ * - Mobile 720p video swap
+ * - Lazy-load on noncritical images
+ * - Trust row with 5 PNG badges (AWS, Stripe, Encryption, AI, Support)
  */
 
 const LOGO_HEADER = "/logo-header.png";
@@ -21,7 +22,7 @@ const HERO_CDN =
 const CHAT_CDN =
   "https://cdn.coverr.co/videos/coverr-slicing-fresh-vegetables-1831/1080p.mp4";
 
-// Lighter 720p variants for mobile (swap at runtime)
+// Lighter 720p variants for mobile swap
 const HERO_MOBILE =
   "https://cdn.coverr.co/videos/coverr-chef-preparing-food-in-the-kitchen-720p.mp4";
 const CHAT_MOBILE =
@@ -106,7 +107,7 @@ export default function Home() {
             rgba(244, 199, 98, 0.12) 35%,
             transparent 70%
           );
-          filter: blur(12px);
+          filter: blur(10px);
           border-radius: 40px;
           pointer-events: none;
         }
@@ -124,7 +125,7 @@ export default function Home() {
           border-radius: 999px;
           padding: 14px 22px;
           font-weight: 800;
-          font-size: clamp(14px, 1.8vw, 16px); /* mobile button text fix */
+          font-size: clamp(14px, 1.8vw, 16px);
           line-height: 1.1;
           transition: all 0.2s ease;
           will-change: transform, box-shadow;
@@ -249,32 +250,12 @@ export default function Home() {
           color: var(--slate);
         }
 
-        /* Trust row hover glow (CSS-only, zero JS) */
-        .trust-badge {
-          border-radius: 14px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: rgba(255, 255, 255, 0.03);
-          padding: 10px 12px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          transition: box-shadow 0.2s ease, transform 0.2s ease,
-            background 0.2s ease;
+        /* Trust row hover (CSS-only, zero JS) */
+        .trust-img {
+          transition: transform 0.2s ease;
         }
-        .trust-badge:hover {
-          background: rgba(255, 255, 255, 0.06);
-          box-shadow: 0 0 0 6px rgba(244, 199, 98, 0.12),
-            0 10px 24px rgba(244, 199, 98, 0.12);
-          transform: translateY(-1px);
-        }
-        .trust-title {
-          font-weight: 700;
-          letter-spacing: 0.1px;
-        }
-        .trust-sub {
-          font-size: 12px;
-          color: rgba(255, 255, 255, 0.75);
-          letter-spacing: 0.2px;
+        .trust-img:hover {
+          transform: translateY(-1px) scale(1.03);
         }
       `}</style>
 
@@ -329,10 +310,7 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover opacity-60"
           style={{ filter: "brightness(1.18) contrast(1.06)" }}
         >
-          <source
-            src={isMobile ? HERO_MOBILE : HERO_CDN}
-            type="video/mp4"
-          />
+          <source src={isMobile ? HERO_MOBILE : HERO_CDN} type="video/mp4" />
           <source src="/hero.mp4" type="video/mp4" />
         </video>
         {/* Lighter overlay for clarity */}
@@ -363,48 +341,53 @@ export default function Home() {
               </a>
             </div>
 
-            {/* TRUST BADGES (High-Trust row, real logos) */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-[13px] md:text-sm">
-              {/* AWS */}
-              <div className="trust-badge">
-                <AWSLogo />
-                <div>
-                  <div className="trust-title">Powered by AWS Cloud</div>
-                  <div className="trust-sub">Scalable & reliable</div>
-                </div>
-              </div>
-              {/* Stripe */}
-              <div className="trust-badge">
-                <StripeLogo />
-                <div>
-                  <div className="trust-title">Secure Payments by Stripe</div>
-                  <div className="trust-sub">PCI-DSS compliant</div>
-                </div>
-              </div>
-              {/* Security */}
-              <div className="trust-badge">
-                <LockShield />
-                <div>
-                  <div className="trust-title">Bank-Level Encryption</div>
-                  <div className="trust-sub">AES-256 • TLS 1.2+</div>
-                </div>
-              </div>
-              {/* AI */}
-              <div className="trust-badge">
-                <AIBrain />
-                <div>
-                  <div className="trust-title">AI-Powered Accuracy</div>
-                  <div className="trust-sub">Forecasts & insights</div>
-                </div>
-              </div>
-              {/* Support */}
-              <div className="trust-badge">
-                <Headset />
-                <div>
-                  <div className="trust-title">24/7 US-Based Support</div>
-                  <div className="trust-sub">Real humans, fast help</div>
-                </div>
-              </div>
+            {/* TRUST BADGES — 5 PNG logos in one centered row */}
+            <div className="mt-8 flex flex-wrap justify-center items-center gap-6 md:gap-10">
+              <img
+                src="/aws.png"
+                alt="Powered by AWS Cloud"
+                width={120}
+                height={40}
+                loading="lazy"
+                decoding="async"
+                className="object-contain trust-img"
+              />
+              <img
+                src="/stripe.png"
+                alt="Secure Payments by Stripe"
+                width={120}
+                height={40}
+                loading="lazy"
+                decoding="async"
+                className="object-contain trust-img"
+              />
+              <img
+                src="/encryption.png"
+                alt="Bank-Level Encryption"
+                width={120}
+                height={40}
+                loading="lazy"
+                decoding="async"
+                className="object-contain trust-img"
+              />
+              <img
+                src="/ai.png"
+                alt="AI-Powered Accuracy"
+                width={120}
+                height={40}
+                loading="lazy"
+                decoding="async"
+                className="object-contain trust-img"
+              />
+              <img
+                src="/support.png"
+                alt="24/7 Support"
+                width={120}
+                height={40}
+                loading="lazy"
+                decoding="async"
+                className="object-contain trust-img"
+              />
             </div>
           </div>
 
@@ -570,7 +553,7 @@ export default function Home() {
           <p className="lead mb-10">
             Proof from real kitchens using AI to protect margins.
           </p>
-          <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
             {[
               {
                 img: "https://randomuser.me/api/portraits/women/44.jpg",
@@ -643,7 +626,7 @@ export default function Home() {
       <section id="faq" className="section">
         <div className="container">
           <h2 className="h2 mb-3">Frequently asked questions</h2>
-        <p className="lead mb-8">
+          <p className="lead mb-8">
             Quick answers about pricing, setup, and how DishFuse fits into your kitchen workflow.
           </p>
 
@@ -721,12 +704,16 @@ export default function Home() {
                 popular: false,
               },
             ].map((t) => (
-              <div key={t.plan} className={`card priceCard ${t.popular ? "popular" : ""}`}>
+              <div
+                key={t.plan}
+                className={`card priceCard ${t.popular ? "popular" : ""}`}
+              >
                 {t.popular && (
                   <div
                     className="mb-3 text-xs font-extrabold text-[#0B1222]"
                     style={{
-                      background: "linear-gradient(135deg,var(--gold),var(--gold-2))",
+                      background:
+                        "linear-gradient(135deg,var(--gold),var(--gold-2))",
                       display: "inline-block",
                       padding: "6px 12px",
                       borderRadius: 999,
@@ -748,7 +735,10 @@ export default function Home() {
                     <li key={f}>✅ {f}</li>
                   ))}
                 </ul>
-                <a href="#cta" className="btn btn-primary gold-glow w-full justify-center">
+                <a
+                  href="#cta"
+                  className="btn btn-primary gold-glow w-full justify-center"
+                >
                   {t.plan === "Custom" ? "Contact Sales" : "Start Free Trial"}
                 </a>
               </div>
@@ -792,107 +782,6 @@ export default function Home() {
         </div>
       </footer>
     </main>
-  );
-}
-
-/* ---------- Inline SVGs for Trust Row ---------- */
-function AWSLogo() {
-  return (
-    <svg width="48" height="24" viewBox="0 0 120 60" aria-label="AWS" role="img">
-      {/* Wordmark (neutral) */}
-      <text x="0" y="32" fontFamily="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" fontWeight="800" fontSize="30" fill="#111">
-        aws
-      </text>
-      {/* Smile */}
-      <path
-        d="M18 42c22 14 62 14 84 0"
-        fill="none"
-        stroke="#FF9900"
-        strokeWidth="6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function StripeLogo() {
-  return (
-    <svg width="64" height="24" viewBox="0 0 160 60" aria-label="Stripe" role="img">
-      <rect x="0" y="8" width="160" height="44" rx="10" fill="#635BFF" opacity="0.2" />
-      <text
-        x="12"
-        y="40"
-        fontFamily="system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
-        fontWeight="900"
-        fontSize="28"
-        fill="#635BFF"
-      >
-        stripe
-      </text>
-    </svg>
-  );
-}
-
-function LockShield() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" aria-label="Bank-level security" role="img">
-      <path
-        d="M7 10V8a5 5 0 0 1 10 0v2"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <rect
-        x="4"
-        y="10"
-        width="16"
-        height="10"
-        rx="2.2"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <circle cx="12" cy="15" r="1.8" fill="currentColor" />
-    </svg>
-  );
-}
-
-function AIBrain() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" aria-label="AI accuracy" role="img">
-      <path
-        d="M8.5 6.5c-2.2 0-4 1.8-4 4 0 1 .4 1.9 1 2.6V17a2 2 0 0 0 2 2h2v-2.2M15.5 6.5c2.2 0 4 1.8 4 4 0 1-.4 1.9-1 2.6V17a2 2 0 0 1-2 2h-2v-2.2"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <circle cx="12" cy="10.5" r="2.2" fill="currentColor" />
-    </svg>
-  );
-}
-
-function Headset() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" aria-label="24/7 support" role="img">
-      <path
-        d="M4 12a8 8 0 1 1 16 0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <rect x="3" y="12" width="4" height="6" rx="1.2" fill="currentColor" />
-      <rect x="17" y="12" width="4" height="6" rx="1.2" fill="currentColor" />
-      <path
-        d="M9 19c1.2.7 2.8 1 4 1s2.8-.3 4-1"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
   );
 }
 
