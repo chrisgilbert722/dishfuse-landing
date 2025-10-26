@@ -4,16 +4,16 @@ import React, { useEffect, useState } from "react";
 
 /**
 * DishFuse — High-converting Landing (Navy + Gold)
-* - Autoplay videos (hero + chat demo), CDN first with local fallback
-* - Chef Maria × DishFuse AI simulated chat (slowed timing)
-* - Pricing: $99 / $199 / Custom
-* - Uses your existing logos in /public: /logo-header.png and /logo-footer.png
+* - Autoplay videos (hero + chat demo)
+* - Chef Maria × DishFuse AI simulated chat
+* - Testimonials + Pricing + CTA
+* - Lightened gradients for higher clarity and conversion
 */
 
 const LOGO_HEADER = "/logo-header.png";
 const LOGO_FOOTER = "/logo-footer.png";
 
-// CDN-first video sources
+// CDN-first video sources with local fallback
 const HERO_CDN =
 "https://cdn.coverr.co/videos/coverr-chef-preparing-food-in-the-kitchen-1080p.mp4";
 const CHAT_CDN =
@@ -178,7 +178,7 @@ transform: translateY(0);
 </div>
 </header>
 
-{/* HERO */}
+{/* HERO SECTION */}
 <section className="relative min-h-[84vh] flex items-center overflow-hidden">
 <video autoPlay muted loop playsInline preload="auto"
 poster="/poster-hero.jpg"
@@ -187,8 +187,7 @@ style={{ filter: "brightness(1.2) contrast(1.05)" }}>
 <source src={HERO_CDN} type="video/mp4" />
 <source src="/hero.mp4" type="video/mp4" />
 </video>
-<div className="absolute inset-0 bg-[radial-gradient(1000px_400px_at_70%_-10%,rgba(244,199,98,0.14),transparent)]" />
-<div className="absolute inset-0 bg-gradient-to-b from-[#0B1222]/15 via-[#0B1222]/25 to-[#0B1222]/45" />
+<div className="absolute inset-0 bg-gradient-to-b from-[#0B1222]/20 via-[#0B1222]/30 to-[#0B1222]/50" />
 
 <div className="container relative z-10 grid md:grid-cols-2 gap-10 items-center py-16">
 <div>
@@ -209,14 +208,9 @@ DishFuse uses AI to price your menu, forecast inventory and cut waste so you inc
 <a href="#pricing" className="btn btn-primary">Start Free 14-Day Trial</a>
 <a href="#demo" className="btn btn-ghost">Watch Live Demo</a>
 </div>
-<div className="mt-8 flex gap-6 text-sm text-white/80">
-<span>✓ No credit card required</span>
-<span>✓ Cancel anytime</span>
-<span>✓ Setup in 60 min</span>
-</div>
 </div>
 
-<div className="glass rounded-2xl p-5 md:p-6">
+<div className="glass rounded-2xl p-6">
 <div className="grid grid-cols-3 gap-4">
 {[
 { k: "+27%", d: "Avg margin lift" },
@@ -231,9 +225,6 @@ DishFuse uses AI to price your menu, forecast inventory and cut waste so you inc
 </div>
 ))}
 </div>
-<p className="mt-4 text-xs text-white/60 text-center">
-*Pilot results from single-location restaurants.
-</p>
 </div>
 </div>
 </section>
@@ -342,12 +333,38 @@ Start Free 14-Day Trial
 <section id="results" className="section">
 <div className="container">
 <h2 className="h2 mb-3">What restaurant owners are saying</h2>
-<p className="lead mb-10">
-Proof from real kitchens using AI to protect margins.
-</p>
+<p className="lead mb-10">Proof from real kitchens using AI to protect margins.</p>
 <div className="grid md:grid-cols-3 gap-6">
 {[
 { img: "https://randomuser.me/api/portraits/women/44.jpg", name: "Chef Maria Thompson", role: "Owner, Bella Forno", quote: "DishFuse cut our waste by nearly 40%. Pricing confidence went way up and so did margins." },
 { img: "https://randomuser.me/api/portraits/men/32.jpg", name: "James Carter", role: "GM, Bistro 21", quote: "Inventory forecasts are spot on. Ordering takes minutes and we avoid 86s on busy nights." },
-{ img: "https://randomuser.me/api/portraits/women/65.jpg", name: "Lena Ortiz", role: "Owner, Café Luna", quote: "Finally see which dishes
+{ img: "https://randomuser.me/api/portraits/women/65.jpg", name: "Lena Ortiz", role: "Owner, Café Luna", quote: "Finally see which dishes actually make money. We adjusted prices and margins stabilized fast." },
+{ img: "https://randomuser.me/api/portraits/men/12.jpg", name: "Andre Nguyen", role: "Owner, Saigon Social", quote: "The waste alerts alone paid for the subscription in the first month." },
+{ img: "https://randomuser.me/api/portraits/women/21.jpg", name: "Priya Sharma", role: "Operator, Spice Lane", quote: "We used data to push weekend pricing gracefully—customers were happy and so were margins." },
+{ img: "https://randomuser.me/api/portraits/men/85.jpg", name: "David Romero", role: "Owner, GreenLeaf Café", quote: "Clear reporting, simple actions. It’s like a profit coach built into our workflow." },
+].map((t) => (
+<div key={t.name} className="glass rounded-2xl p-6 border border-white/10">
+<div className="flex items-center gap-4 mb-4">
+<img src={t.img} alt={t.name} className="w-14 h-14 rounded-2xl object-cover" />
+<div>
+<div className="font-bold">{t.name}</div>
+<div className="text-white/70 text-sm">{t.role}</div>
+</div>
+</div>
+<p className="text-white/85">“{t.quote}”</p>
+</div>
+))}
+</div>
+</div>
+</section>
+
+{/* PRICING */}
+<section id="pricing" className="section">
+<div className="container">
+<h2 className="h2 mb-3">Simple, transparent pricing</h2>
+<p className="lead mb-10">Choose the plan that fits your restaurant. Cancel anytime — no contracts.</p>
+<div className="grid md:grid-cols-3 gap-6">
+{[
+{ plan: "Starter", price: "$99/mo", desc: "Perfect for single-location restaurants.", features: ["AI menu pricing", "Inventory forecasting", "
 	
+
