@@ -7,13 +7,13 @@ import React, { useEffect, useState } from "react";
 * - Autoplay videos (hero + chat demo)
 * - Chef Maria × DishFuse AI simulated chat
 * - Testimonials + Pricing + CTA
-* - Lightened gradients for higher clarity and conversion
+* - Lightened overlays for max clarity & conversions
 */
 
 const LOGO_HEADER = "/logo-header.png";
 const LOGO_FOOTER = "/logo-footer.png";
 
-// CDN-first video sources with local fallback
+// CDN-first videos with local fallbacks
 const HERO_CDN =
 "https://cdn.coverr.co/videos/coverr-chef-preparing-food-in-the-kitchen-1080p.mp4";
 const CHAT_CDN =
@@ -178,16 +178,16 @@ transform: translateY(0);
 </div>
 </header>
 
-{/* HERO SECTION */}
+{/* HERO */}
 <section className="relative min-h-[84vh] flex items-center overflow-hidden">
 <video autoPlay muted loop playsInline preload="auto"
 poster="/poster-hero.jpg"
-className="absolute inset-0 w-full h-full object-cover opacity-50"
-style={{ filter: "brightness(1.2) contrast(1.05)" }}>
+className="absolute inset-0 w-full h-full object-cover opacity-45"
+style={{ filter: "brightness(1.25) contrast(1.05)" }}>
 <source src={HERO_CDN} type="video/mp4" />
 <source src="/hero.mp4" type="video/mp4" />
 </video>
-<div className="absolute inset-0 bg-gradient-to-b from-[#0B1222]/20 via-[#0B1222]/30 to-[#0B1222]/50" />
+<div className="absolute inset-0 bg-gradient-to-b from-[#0B1222]/25 via-[#0B1222]/35 to-[#0B1222]/55" />
 
 <div className="container relative z-10 grid md:grid-cols-2 gap-10 items-center py-16">
 <div>
@@ -202,28 +202,11 @@ Turn food costs into{" "}
 <span style={{ color: "var(--gold)" }}>predictable profit</span>
 </h1>
 <p className="lead mb-8">
-DishFuse uses AI to price your menu, forecast inventory and cut waste so you increase margins without working longer hours.
+DishFuse uses AI to price your menu, forecast inventory, and cut waste — so you increase margins without working longer hours.
 </p>
 <div className="flex flex-wrap gap-12 items-center">
 <a href="#pricing" className="btn btn-primary">Start Free 14-Day Trial</a>
 <a href="#demo" className="btn btn-ghost">Watch Live Demo</a>
-</div>
-</div>
-
-<div className="glass rounded-2xl p-6">
-<div className="grid grid-cols-3 gap-4">
-{[
-{ k: "+27%", d: "Avg margin lift" },
-{ k: "−42%", d: "Less food waste" },
-{ k: "5 min", d: "Weekly ordering" },
-].map((x) => (
-<div key={x.d} className="text-center">
-<div className="text-2xl font-extrabold" style={{ color: "var(--gold)" }}>
-{x.k}
-</div>
-<div className="text-white/75 text-sm">{x.d}</div>
-</div>
-))}
 </div>
 </div>
 </div>
@@ -234,11 +217,11 @@ DishFuse uses AI to price your menu, forecast inventory and cut waste so you inc
 <div className="container">
 <h2 className="h2 mb-3">Smart tools for smarter kitchens</h2>
 <p className="lead mb-10">
-Price each dish to target margin, predict next week’s buy list and stop losses before they happen.
+Price each dish to target margin, predict next week’s buy list, and stop losses before they happen.
 </p>
 <div className="grid md:grid-cols-3 gap-6">
 {[
-{ t: "AI Menu Pricing", p: "Dynamic suggestions by dish and daypart to hit target margins.", e: "💹" },
+{ t: "AI Menu Pricing", p: "Dynamic suggestions by dish & daypart to hit your target margins.", e: "💹" },
 { t: "Inventory Forecasting", p: "Predict SKUs by the day to avoid 86s and over-ordering.", e: "📦" },
 { t: "Waste Prevention Alerts", p: "Real-time flags for expiring items and anomalies.", e: "⚠️" },
 ].map((f) => (
@@ -257,11 +240,11 @@ Price each dish to target margin, predict next week’s buy list and stop losses
 <video autoPlay muted loop playsInline preload="auto"
 poster="/poster-chat.jpg"
 className="absolute inset-0 w-full h-full object-cover opacity-35"
-style={{ filter: "brightness(1.2) contrast(1.08)" }}>
+style={{ filter: "brightness(1.25) contrast(1.08)" }}>
 <source src={CHAT_CDN} type="video/mp4" />
 <source src="/chat.mp4" type="video/mp4" />
 </video>
-<div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B1222]/55 to-[#0B1222]/70" />
+<div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B1222]/55 to-[#0B1222]/75" />
 
 <div className="container relative z-10">
 <h2 className="h2 mb-2">Chef Maria × DishFuse AI</h2>
@@ -296,7 +279,7 @@ Great — how much mozzarella should I order?
 )}
 {chatStep >= 3 && (
 <div className="bubble ai">
-Forecast is <b style={{ color: "var(--gold)" }}>18.4 lbs</b> for 7 days. Adding 8% buffer →
+Forecast is <b style={{ color: "var(--gold)" }}>18.4 lbs</b> for 7 days. Adding 8% buffer →{" "}
 <b style={{ color: "var(--gold)" }}>19.9 lbs</b>.
 </div>
 )}
@@ -362,9 +345,54 @@ Start Free 14-Day Trial
 <section id="pricing" className="section">
 <div className="container">
 <h2 className="h2 mb-3">Simple, transparent pricing</h2>
-<p className="lead mb-10">Choose the plan that fits your restaurant. Cancel anytime — no contracts.</p>
+<p className="lead mb-10">
+Choose the plan that fits your restaurant. Cancel anytime — no contracts.
+</p>
+
 <div className="grid md:grid-cols-3 gap-6">
 {[
+{
+plan: "Starter",
+price: "$99/mo",
+desc: "Perfect for single-location restaurants.",
+features: [
+"AI menu pricing",
+"Inventory forecasting",
+"Waste alerts",
+"Analytics dashboard",
+],
+popular: false,
+},
+{
+plan: "Growth",
+price: "$199/mo",
+desc: "For busy kitchens and growing groups.",
+features: [
+"Everything in Starter",
+"Multi-location support",
+"Advanced profit analytics",
+"Priority support",
+],
+popular: true,
+},
+{
+plan: "Custom",
+price: "Let’s Talk",
+desc: "Tailored solutions for multi-brand & franchise groups.",
+features: [
+"Dedicated manager",
+"Custom integrations",
+"Data migration",
+"Team training",
+],
+popular: false,
+},
+].map((t) => (
+<div key={t.plan} className={`card priceCard ${t.popular ? "popular" : ""}`}>
+{t.popular && (
+
+	
+
 { plan: "Starter", price: "$99/mo", desc: "Perfect for single-location restaurants.", features: ["AI menu pricing", "Inventory forecasting", "
 	
 
