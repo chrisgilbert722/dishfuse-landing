@@ -2,11 +2,6 @@
 
 import React, { useEffect, useState, useRef } from "react";
 
-/**
-* DishFuse — High-converting Landing (Navy + Gold)
-* Optimized for Vercel (95+ mobile / 99-100 desktop)
-*/
-
 const LOGO_HEADER = "/logo-header.png";
 const LOGO_FOOTER = "/logo-footer.png";
 const HERO_CDN =
@@ -20,7 +15,6 @@ const [mounted, setMounted] = useState(false);
 const timeoutsRef = useRef([]);
 const runningRef = useRef(false);
 
-// Chat loop runner (natural cadence, repeats)
 const runChatLoop = () => {
 timeoutsRef.current.forEach(clearTimeout);
 timeoutsRef.current = [];
@@ -93,27 +87,6 @@ background: rgba(255, 255, 255, 0.08);
 filter: drop-shadow(0 0 18px rgba(244, 199, 98, 0.35))
 drop-shadow(0 0 40px rgba(244, 199, 98, 0.18));
 }
-.pulse-dot {
-width: 10px;
-height: 10px;
-border-radius: 999px;
-background: #34d399;
-animation: pulse 2s infinite;
-}
-@keyframes pulse {
-0% {
-transform: scale(0.95);
-box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
-}
-70% {
-transform: scale(1);
-box-shadow: 0 0 0 16px rgba(52, 211, 153, 0);
-}
-100% {
-transform: scale(0.95);
-box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
-}
-}
 .section {
 padding: 72px 20px;
 }
@@ -121,40 +94,15 @@ padding: 72px 20px;
 max-width: 1200px;
 margin: 0 auto;
 }
-.h1 {
-font-size: clamp(34px, 6vw, 56px);
-font-weight: 900;
-line-height: 1.05;
-}
-.h2 {
-font-size: clamp(28px, 4.6vw, 40px);
-font-weight: 800;
-}
-.lead {
-color: var(--slate);
-font-size: clamp(16px, 2vw, 20px);
-}
-.card {
-border-radius: 20px;
-padding: 22px;
-border: 1px solid rgba(255, 255, 255, 0.12);
-background: linear-gradient(160deg, #16284a, var(--navy));
-}
 .faq-q {
 display: flex;
 justify-content: space-between;
 align-items: center;
-text-align: left;
-gap: 12px;
 padding: 16px 18px;
 border-radius: 14px;
 background: rgba(255, 255, 255, 0.04);
 border: 1px solid rgba(255, 255, 255, 0.08);
-transition: 0.2s ease;
-}
-.faq-q:hover {
-background: rgba(255, 255, 255, 0.06);
-border-color: rgba(255, 255, 255, 0.12);
+transition: 0.2s;
 }
 .faq-a {
 padding: 12px 4px 22px;
@@ -162,8 +110,8 @@ color: var(--slate);
 }
 .badge {
 display: inline-flex;
-gap: 10px;
 align-items: center;
+gap: 10px;
 padding: 10px 14px;
 border-radius: 14px;
 border: 1px solid rgba(255, 255, 255, 0.12);
@@ -179,7 +127,7 @@ height: 18px;
 <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(20,34,58,0.7)] backdrop-blur-md">
 <div className="container flex items-center justify-between py-4">
 <img src={LOGO_HEADER} alt="DishFuse" className="h-10 w-auto logo-glow" />
-<nav className="hidden md:flex items-center gap-14 text-sm text-white/80">
+<nav className="hidden md:flex gap-10 text-sm text-white/80">
 <a href="#features" className="hover:text-white">
 Features
 </a>
@@ -193,7 +141,7 @@ Results
 Live Demo
 </a>
 </nav>
-<div className="flex items-center gap-3">
+<div className="flex gap-3">
 <a href="#pricing" className="btn btn-ghost">
 See Plans
 </a>
@@ -220,24 +168,16 @@ style={{ filter: "brightness(1.15) contrast(1.04)" }}
 <source src="/hero.mp4" type="video/mp4" />
 </video>
 <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(20,34,58,0.15),rgba(20,34,58,0.3))]" />
-
-<div className="container relative z-10 grid md:grid-cols-2 gap-10 items-center py-16">
-<div>
-<div className="flex items-center gap-2 mb-5">
-<span className="pulse-dot" />
-<span className="font-semibold text-sm text-white/90">
-AI for restaurants — not spreadsheets
-</span>
-</div>
-<h1 className="h1 mb-4">
+<div className="container relative z-10 py-16">
+<h1 className="text-5xl font-bold mb-6">
 Turn food costs into{" "}
 <span style={{ color: "var(--gold)" }}>predictable profit</span>
 </h1>
-<p className="lead mb-8">
-DishFuse uses AI to price your menu, forecast inventory, and cut waste —
-so you increase margins without working longer hours.
+<p className="text-lg text-white/85 mb-8 max-w-2xl">
+DishFuse uses AI to price your menu, forecast inventory, and cut waste — so
+you increase margins without working longer hours.
 </p>
-<div className="flex flex-wrap gap-12 items-center">
+<div className="flex flex-wrap gap-6">
 <a href="#pricing" className="btn btn-primary">
 Start Free 14-Day Trial
 </a>
@@ -246,76 +186,12 @@ Watch Live Demo
 </a>
 </div>
 </div>
-</div>
-</section>
-
-{/* DEMO SECTION */}
-<section id="demo" className="relative section overflow-hidden">
-<video
-autoPlay
-muted
-loop
-playsInline
-preload="auto"
-poster="/poster-chat.jpg"
-className="absolute inset-0 w-full h-full object-cover opacity-55"
-style={{ filter: "brightness(1.12) contrast(1.06)" }}
->
-<source src={CHAT_CDN} type="video/mp4" />
-<source src="/chat.mp4" type="video/mp4" />
-</video>
-<div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(20,34,58,0.0),rgba(20,34,58,0.5))]" />
-<div className="container relative z-10">
-<h2 className="h2 mb-2">Chef Maria × DishFuse AI</h2>
-<p className="lead mb-8">See how owners get answers in seconds.</p>
-
-<div className="glass rounded-2xl p-6">
-{mounted && (
-<>
-<div className="bubble user mb-4">
-Hey DishFuse — what price should I set for our Margherita pizza this
-weekend?
-</div>
-{chatStep >= 1 && (
-<div className="bubble ai mb-4">
-Based on cost trends and demand spikes Fri–Sun, target price is{" "}
-<b style={{ color: "var(--gold)" }}>$15.50 – $16.25</b> to keep
-margin at <b style={{ color: "var(--gold)" }}>31–33%</b>.
-</div>
-)}
-{chatStep >= 2 && (
-<div className="bubble user mb-4">Great — how much mozzarella?</div>
-)}
-{chatStep >= 3 && (
-<div className="bubble ai mb-4">
-Forecast is{" "}
-<b style={{ color: "var(--gold)" }}>18.4 lbs</b> for 7 days. Adding
-buffer → <b style={{ color: "var(--gold)" }}>19.9 lbs</b>.
-</div>
-)}
-{chatStep >= 4 && (
-<div className="bubble ai">
-Want me to generate a pre-approved buy list?
-<div className="mt-3">
-<a href="#pricing" className="btn btn-primary">
-Start Free 14-Day Trial
-</a>
-</div>
-</div>
-)}
-</>
-)}
-</div>
-</div>
 </section>
 
 {/* FAQ */}
 <section id="faq" className="section">
 <div className="container">
-<h2 className="h2 mb-3">Frequently Asked Questions</h2>
-<p className="lead mb-8">
-Quick answers about pricing, setup, and how DishFuse fits into your workflow.
-</p>
+<h2 className="text-3xl font-bold mb-3">Frequently Asked Questions</h2>
 <FAQAccordion
 items={[
 {
@@ -347,15 +223,13 @@ a: "Most restaurants finish setup in under 60 minutes.",
 <section id="cta" className="section">
 <div className="container text-center">
 <div className="glass rounded-3xl p-10 md:p-14">
-<h3 className="h2 mb-3">Ready to see hidden profit?</h3>
-<p className="lead mb-7">
+<h3 className="text-3xl font-bold mb-3">Ready to see hidden profit?</h3>
+<p className="text-lg mb-7 text-white/85">
 Join restaurants using DishFuse to boost margins and cut waste with AI.
 </p>
 <a href="#pricing" className="btn btn-primary">
 Start Free 14-Day Trial
 </a>
-
-{/* TRUST BADGE STRIP */}
 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 <TrustBadge text="Backed by Stripe" icon="shield" />
 <TrustBadge text="Bank-Level Security" icon="lock" />
@@ -393,19 +267,11 @@ return (
 <button
 className="faq-q w-full"
 onClick={() => setOpenIndex(isOpen ? -1 : idx)}
-aria-expanded={isOpen}
-aria-controls={`faq-${idx}`}
 >
 <span className="font-semibold">{it.q}</span>
-<span aria-hidden className="text-white/70">
-{isOpen ? "−" : "+"}
-</span>
+<span aria-hidden className="text-white/70">{isOpen ? "−" : "+"}</span>
 </button>
-{isOpen && (
-<div id={`faq-${idx}`} className="faq-a">
-{it.a}
-</div>
-)}
+{isOpen && <div className="faq-a">{it.a}</div>}
 </div>
 );
 })}
@@ -417,24 +283,88 @@ aria-controls={`faq-${idx}`}
 function TrustBadge({ text, icon = "shield" }) {
 const Icon = () => {
 switch (icon) {
-case "lock":
+case "gear":
 return (
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M7 10V8a5 5 0 0110 0v2" stroke="url(#a)" strokeWidth="2" />
-<rect x="5" y="10" width="14" height="10" rx="2" stroke="url(#a)" strokeWidth="2" />
+<path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="url(#grad)" strokeWidth="2" />
+<path
+d="M19 12a7 7 0 00-.1-1l2.1-1.5-2-3.5-2.5 1a7 7 0 00-1.7-1L14 2h-4l-.8 3a7 7 0 00-1.7 1l-2.5-1-2 3.5L4.1 11a7 7 0 000 2l-2.1 1.5 2 3.5 2.5-1a7 7 0 001.7 1L10 22h4l.8-3a7 7 0 001.7-1l2.5 1 2-3.5L18.9 13c.1-.33.1-.67.1-1z"
+stroke="url(#grad)"
+strokeWidth="2"
+/>
 <defs>
-<linearGradient id="a" x1="0" y1="0" x2="24" y2="24">
+<linearGradient id="grad" x1="0" y1="0" x2="24" y2="24">
 <stop stopColor="#F4C762" />
 <stop offset="1" stopColor="#EEB94A" />
 </linearGradient>
 </defs>
 </svg>
 );
-case "gear":
+case "lock":
 return (
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="url(#b)" strokeWidth="2" />
+<path d="M7 10V8a5 5 0 0110 0v2" stroke="url(#grad2)" strokeWidth="2" />
+<rect x="5" y="10" width="14" height="10" rx="2" stroke="url(#grad2)" strokeWidth="2" />
+<defs>
+<linearGradient id="grad2" x1="0" y1="0" x2="24" y2="24">
+<stop stopColor="#F4C762" />
+<stop offset="1" stopColor="#EEB94A" />
+</linearGradient>
+</defs>
+</svg>
+);
+case "chef":
+return (
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M6 10a4 4 0 118-1 3 3 0 113 4H6z" stroke="url(#grad3)" strokeWidth="2" />
+<path d="M7 22v-5h10v5M9 17v-3h6v3" stroke="url(#grad3)" strokeWidth="2" />
+<defs>
+<linearGradient id="grad3" x1="0" y1="0" x2="24" y2="24">
+<stop stopColor="#F4C762" />
+<stop offset="1" stopColor="#EEB94A" />
+</linearGradient>
+</defs>
+</svg>
+);
+case "bulb":
+return (
+<svg viewBox="0 0 24 24" fill="none">
 <path
-d="M19 12a7 7 0
+d="M12 2a7 7 0 00-4 12c.8.7 1 1.7 1 2h6c0-1 .2-1.3 1-2a7 7 0 00-4-12zM9 18h6M10 21h4"
+stroke="url(#grad4)"
+strokeWidth="2"
+/>
+<defs>
+<linearGradient id="grad4" x1="0" y1="0" x2="24" y2="24">
+<stop stopColor="#F4C762" />
+<stop offset="1" stopColor="#EEB94A" />
+</linearGradient>
+</defs>
+</svg>
+);
+default:
+return (
+<svg viewBox="0 0 24 24" fill="none">
+<path
+d="M12 3l8 3v6c0 5-3.4 8.5-8 9-4.6-.5-8-4-8-9V6l8-3z"
+stroke="url(#grad5)"
+strokeWidth="2"
+/>
+<defs>
+<linearGradient id="grad5" x1="0" y1="0" x2="24" y2="24">
+<stop stopColor="#F4C762" />
+<stop offset="1" stopColor="#EEB94A" />
+</linearGradient>
+</defs>
+</svg>
+);
+}
+};
+return (
+<div className="badge">
+<Icon />
+<span>{text}</span>
+</div>
+);
+}
 	
-
