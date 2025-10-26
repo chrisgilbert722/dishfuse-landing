@@ -390,9 +390,69 @@ popular: false,
 ].map((t) => (
 <div key={t.plan} className={`card priceCard ${t.popular ? "popular" : ""}`}>
 {t.popular && (
+<div
+className="mb-3 text-xs font-extrabold text-[#0B1222]"
+style={{
+background: "linear-gradient(135deg,var(--gold),var(--gold-2))",
+display: "inline-block",
+padding: "6px 12px",
+borderRadius: 999,
+}}
+>
+MOST POPULAR
+</div>
+)}
+<div className="text-2xl font-bold mb-1">{t.plan}</div>
+<div
+className="text-4xl font-extrabold mb-2"
+style={{ color: "var(--gold)" }}
+>
+{t.price}
+</div>
+<div className="text-white/75 mb-6">{t.desc}</div>
+<ul className="text-white/85 mb-6 space-y-2">
+{t.features.map((f) => (
+<li key={f}>✅ {f}</li>
+))}
+</ul>
+<a href="#cta" className="btn btn-primary w-full justify-center">
+{t.plan === "Custom" ? "Contact Sales" : "Start Free Trial"}
+</a>
+</div>
+))}
+</div>
 
+<p className="mt-8 text-sm text-white/70 text-center">
+✓ 14-day free trial • ✓ No credit card required • ✓ Cancel anytime
+</p>
+</div>
+</section>
+
+{/* FINAL CTA */}
+<section id="cta" className="section">
+<div className="container">
+<div className="glass rounded-3xl p-10 md:p-14 text-center">
+<h3 className="h2 mb-3">Ready to see hidden profit?</h3>
+<p className="lead mb-7">
+Join restaurants using DishFuse to boost margins and cut waste with AI.
+</p>
+<a href="#pricing" className="btn btn-primary">
+Start Free 14-Day Trial
+</a>
+</div>
+</div>
+</section>
+
+{/* FOOTER */}
+<footer className="border-t border-white/10 py-10 bg-[#0A1120]">
+<div className="container flex flex-col items-center gap-4">
+<img src={LOGO_FOOTER} alt="DishFuse" className="h-6 md:h-7" />
+<div className="text-white/60 text-sm">
+© {new Date().getFullYear()} DishFuse. All rights reserved.
+</div>
+</div>
+</footer>
+</main>
+);
+}
 	
-
-{ plan: "Starter", price: "$99/mo", desc: "Perfect for single-location restaurants.", features: ["AI menu pricing", "Inventory forecasting", "
-	
-
