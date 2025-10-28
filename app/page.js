@@ -259,44 +259,47 @@ export default function Home() {
         }
       `}</style>
 
-      {/* HEADER */}
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(31,45,80,0.72)] backdrop-blur-md">
-        <div className="container flex items-center justify-between py-4">
-          <div className="gold-glow rounded-2xl px-1 py-1">
-            <img
-              src={LOGO_HEADER}
-              alt="DishFuse logo"
-              className="h-10 w-auto"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
+{/* HEADER */}
+<header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(11,18,34,0.7)] backdrop-blur-md">
+  <div className="max-w-[1200px] mx-auto flex justify-between items-center py-4 px-4">
 
-          <nav className="hidden md:flex items-center gap-14 text-sm text-white/80">
-            <a href="#features" className="hover:text-white">
-              Features
-            </a>
-            <a href="#pricing" className="hover:text-white">
-              Pricing
-            </a>
-            <a href="#results" className="hover:text-white">
-              Results
-            </a>
-            <a href="#demo" className="hover:text-white">
-              Live Demo
-            </a>
-          </nav>
+    {/* LOGO */}
+    <img
+      src="/logo-header.png"
+      alt="DishFuse logo"
+      className="h-10 w-auto"
+      loading="eager"
+      decoding="async"
+    />
 
-          <div className="flex items-center gap-3">
-            <a href="#pricing" className="btn btn-ghost">
-              See Plans
-            </a>
-            <a href="#cta" className="btn btn-primary gold-glow">
-              Start Free Trial
-            </a>
-          </div>
-        </div>
-      </header>
+    {/* DESKTOP NAV */}
+    <nav className="hidden md:flex gap-12 text-white/80 text-sm">
+      <a href="#features" className="hover:text-white">Features</a>
+      <a href="#pricing" className="hover:text-white">Pricing</a>
+      <a href="#results" className="hover:text-white">Results</a>
+      <a href="#demo" className="hover:text-white">Live Demo</a>
+    </nav>
+
+    {/* CTAs */}
+    <div className="flex items-center gap-3">
+      <a
+        href="#login"
+        className="btn btn-ghost"
+        aria-label="Log in to your DishFuse account"
+      >
+        Log In
+      </a>
+      <a
+        href="#cta"
+        className="btn btn-primary"
+        aria-label="Start your free trial"
+      >
+        Start Free Trial
+      </a>
+    </div>
+  </div>
+</header>
+
 
       {/* HERO */}
       <section className="relative min-h-[84vh] flex items-center overflow-hidden">
