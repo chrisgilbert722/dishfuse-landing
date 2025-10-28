@@ -1,46 +1,17 @@
 "use client";
 
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Head from "next/head";
 
 /**
- * DishFuse — High-Converting Landing (App Router)
- * - Metadata included for SEO/OG/Twitter
- * - SmartVideo: show poster first, swap to video after first paint/idle (boosts mobile)
- * - CLS fixes: explicit width/height on all imgs; fixed min-heights on cards
- * - Mobile button sizing normalized
+ * DishFuse — High-Converting Landing (Option B: Slightly Lighter Navy)
+ * - SmartVideo: poster first → swap to video after first paint (keeps conversions + improves LCP/CLS)
+ * - Fixed width/height on logos/avatars/KPIs to eliminate layout shift (CLS)
+ * - PNG trust badges (3 on top, 2 centered below): aws.png, stripe.png, encryption.png, ai.png, support.png
  * - Profit Calculator BEFORE Pricing
- * - Section order retained: Hero → Features → Demo → Calculator → Pricing → Testimonials → FAQ → CTA → Footer
+ * - Mobile + Desktop button sizing normalized (Medium)
+ * - No sections removed; no SVGs; no external motion libs
  */
-
-export const metadata = {
-  title: "DishFuse — AI for Restaurant Profit",
-  description:
-    "Turn food costs into predictable profit. DishFuse uses AI to price your menu, forecast inventory, and cut waste so margins go up without longer hours.",
-  applicationName: "DishFuse",
-  themeColor: "#1F2D50",
-  openGraph: {
-    title: "DishFuse — AI for Restaurant Profit",
-    description:
-      "AI menu pricing, inventory forecasting, and waste prevention to boost margins.",
-    url: "https://your-domain.com",
-    siteName: "DishFuse",
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "DishFuse" }],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "DishFuse — AI for Restaurant Profit",
-    description:
-      "Price with confidence, order exactly what you need, and see profit clearly.",
-    images: ["/og.jpg"],
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-};
 
 const LOGO_HEADER = "/logo-header.png";
 const LOGO_FOOTER = "/logo-footer.png";
@@ -55,37 +26,38 @@ const HERO_MOBILE =
 const CHAT_MOBILE =
   "https://cdn.coverr.co/videos/coverr-slicing-fresh-vegetables-1831/720p.mp4";
 
-export default function Page() {
+export default function LandingPage() {
   const [chatStep, setChatStep] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // SmartVideo: render poster first, swap to video once idle to protect LCP
+  // SmartVideo: render image first, swap to video once stable
   const [showHeroVideo, setShowHeroVideo] = useState(false);
   const [showChatVideo, setShowChatVideo] = useState(false);
 
-  const timers = useRef<number[]>([]);
+  const timers = useRef([]);
   const running = useRef(false);
 
-  // Chat loop (slowed, natural cadence)
-  const runChat = () => {
-    timers.current.forEach((t) => clearTimeout(t));
+  // Chat loop runner
+  const runChatLoop = () => {
+    // clear old
+    timers.current.forEach(clearTimeout);
     timers.current = [];
-    setChatStep(0);
 
-    timers.current.push(window.setTimeout(() => setChatStep(1), 3000));
-    timers.current.push(window.setTimeout(() => setChatStep(2), 7000));
-    timers.current.push(window.setTimeout(() => setChatStep(3), 11000));
-    timers.current.push(window.setTimeout(() => setChatStep(4), 16000));
+    setChatStep(0);
+    timers.current.push(setTimeout(() => setChatStep(1), 3000));
+    timers.current.push(setTimeout(() => setChatStep(2), 7000));
+    timers.current.push(setTimeout(() => setChatStep(3), 11000));
+    timers.current.push(setTimeout(() => setChatStep(4), 16000));
     timers.current.push(
-      window.setTimeout(() => {
-        if (running.current) runChat();
-      }, 21000)
+      setTimeout(() => running.current && runChatLoop(), 21000)
     );
   };
 
   useEffect(() => {
+    setMounted(true);
     running.current = true;
-    runChat();
+    runChatLoop();
 
     const mq = window.matchMedia("(max-width: 767px)");
     const onChange = () => setIsMobile(mq.matches);
@@ -94,11 +66,12 @@ export default function Page() {
 
     // SmartVideo swap: after first paint + idle
     const swap = () => {
-      // slight delay so headline/CTA become LCP
-      setTimeout(() => setShowHeroVideo(true), 420);
+      // slight delay so headline wins LCP
+      setTimeout(() => setShowHeroVideo(true), 450);
       setTimeout(() => setShowChatVideo(true), 800);
     };
-    if ("requestIdleCallback" in window) {
+    // @ts-ignore
+    if (typeof requestIdleCallback !== "undefined") {
       // @ts-ignore
       requestIdleCallback(swap, { timeout: 1200 });
     } else {
@@ -107,19 +80,154 @@ export default function Page() {
 
     return () => {
       running.current = false;
-      timers.current.forEach((t) => clearTimeout(t));
+      timers.current.forEach(clearTimeout);
       timers.current = [];
       mq.removeEventListener?.("change", onChange);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <main className="min-h-screen text-white bg-gradient-to-b from-[#1F2D50] to-[#24335D]">
-      {/* Global styles tuned for conversion + performance */}
-      <StyleBlock />
+    <main className="min-h-screen text-white bg-gradient-to-b from-[#223463] to-[#2A3F73]">
+      <Head>
+        {/* Performance & SEO hints */}
+        <link rel="preconnect" href="https://cdn.coverr.co" />
+        <link rel="preconnect" href="https://randomuser.me" />
+        <link rel="preload" as="image" href="/logo-header.png" />
+        <link rel="preload" as="image" href="/poster-hero.jpg" />
+        <meta name="theme-color" content="#223463" />
+        <meta name="description" content="DishFuse uses AI to price your menu, forecast inventory, and cut waste — turning food costs into predictable profit." />
+      </Head>
+
+      <style jsx global>{`
+        :root {
+          --navy: #223463; /* lighter navy for mobile clarity (Option B) */
+          --navy-2: #2a3f73;
+          --gold: #f4c762;
+          --gold-2: #eeb94a;
+          --slate: #cbd5e1;
+        }
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        .gold-glow {
+          position: relative;
+          isolation: isolate;
+        }
+        .gold-glow::before {
+          content: "";
+          position: absolute;
+          inset: -18px -22px;
+          z-index: -1;
+          background: radial-gradient(
+            60% 60% at 50% 50%,
+            rgba(244, 199, 98, 0.22) 0%,
+            rgba(244, 199, 98, 0.12) 35%,
+            transparent 70%
+          );
+          filter: blur(10px);
+          border-radius: 40px;
+          pointer-events: none;
+        }
+        .glass {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(10px);
+        }
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          border-radius: 999px;
+          padding: 12px 18px; /* Medium on mobile */
+          font-weight: 800;
+          font-size: 15px;
+          line-height: 1.1;
+          transition: all 0.2s ease;
+          will-change: transform, box-shadow;
+        }
+        @media (min-width: 768px) {
+          .btn {
+            padding: 14px 22px; /* Medium on desktop */
+            font-size: 16px;
+          }
+        }
+        .btn-primary {
+          color: #0b1222;
+          background: linear-gradient(135deg, var(--gold), var(--gold-2));
+          box-shadow: 0 8px 24px rgba(244, 199, 98, 0.25);
+        }
+        .btn-primary:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 14px 34px rgba(244, 199, 98, 0.35);
+        }
+        .btn-ghost {
+          border: 2px solid rgba(255, 255, 255, 0.85);
+          color: #fff;
+          padding: 10px 16px;
+        }
+        .btn-ghost:hover {
+          background: rgba(255, 255, 255, 0.08);
+        }
+        .pulse-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 999px;
+          background: #34d399;
+          animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+          0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); }
+          70% { transform: scale(1); box-shadow: 0 0 0 16px rgba(52, 211, 153, 0); }
+          100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+        }
+        .section { padding: 72px 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; font-weight: 900; }
+        .h2 { font-size: clamp(28px, 4.6vw, 40px); font-weight: 800; }
+        .lead { color: var(--slate); font-size: clamp(16px, 2.1vw, 20px); }
+        .card {
+          border-radius: 20px;
+          padding: 22px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: linear-gradient(160deg, #10244a, #0b1a36);
+        }
+        .priceCard.popular {
+          border: 1px solid rgba(244, 199, 98, 0.65);
+          box-shadow: 0 18px 40px rgba(244, 199, 98, 0.1);
+          background:
+            radial-gradient(1200px 400px at 20% -10%, rgba(244,199,98,0.12), transparent),
+            linear-gradient(160deg, #10244a, #0b1a36);
+        }
+        .bubble {
+          max-width: 540px;
+          padding: 14px 16px;
+          border-radius: 16px;
+          line-height: 1.4;
+          font-size: 15px;
+          opacity: 0;
+          transform: translateY(8px);
+          animation: fadeUp 0.6s ease forwards;
+        }
+        .bubble.ai { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); }
+        .bubble.user { background: rgba(244, 199, 98, 0.12); border: 1px solid rgba(244, 199, 98, 0.35); }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .faq-q {
+          display: flex; width: 100%; justify-content: space-between; align-items: center;
+          gap: 12px; padding: 16px 18px; border-radius: 14px;
+          background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+          transition: background 0.2s ease, border 0.2s ease;
+        }
+        .faq-q:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); }
+        .faq-a { padding: 12px 4px 22px 4px; color: var(--slate); }
+        .trust-img { transition: transform 0.2s ease; display: block; }
+        .trust-img:hover { transform: translateY(-1px) scale(1.03); }
+      `}</style>
 
       {/* HEADER */}
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(11,18,34,0.7)] backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(34,52,99,0.72)] backdrop-blur-md">
         <div className="max-w-[1200px] mx-auto flex justify-between items-center py-3 px-4">
           <img
             src={LOGO_HEADER}
@@ -146,20 +254,16 @@ export default function Page() {
             >
               Login
             </button>
-            <a
-              href="#cta"
-              className="btn btn-primary gold-glow"
-              aria-label="Start your free trial"
-            >
+            <a href="#cta" className="btn btn-primary gold-glow" aria-label="Start your free trial">
               Start Free Trial
             </a>
           </div>
         </div>
       </header>
 
-      {/* HERO (SmartVideo: poster first, then swap) */}
+      {/* HERO (SmartVideo) */}
       <section className="relative min-h-[84vh] flex items-center overflow-hidden">
-        {/* Poster (pre-LCP) */}
+        {/* Poster first for LCP */}
         <img
           src="/poster-hero.jpg"
           alt=""
@@ -184,8 +288,8 @@ export default function Page() {
             <source src="/hero.mp4" type="video/mp4" />
           </video>
         )}
-        {/* Light overlay for clarity on text */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(31,45,80,0.10)] via-[rgba(31,45,80,0.22)] to-[rgba(36,51,93,0.38)]" />
+        {/* lighter overlay for clarity */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(34,52,99,0.10)] via-[rgba(34,52,99,0.22)] to-[rgba(42,63,115,0.38)]" />
 
         <div className="container relative z-10 grid md:grid-cols-2 gap-10 items-center py-16">
           <div>
@@ -200,29 +304,29 @@ export default function Page() {
               <span style={{ color: "var(--gold)" }}>predictable profit</span>
             </h1>
             <p className="lead mb-8">
-              DishFuse uses AI to price your menu, forecast inventory, and cut waste —
-              so you increase margins without working longer hours.
+              DishFuse uses AI to price your menu, forecast inventory, and cut
+              waste — so you increase margins without working longer hours.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
-              <a href="#pricing" className="btn btn-primary gold-glow">
-                Start Free 14-Day Trial
-              </a>
-              <a href="#demo" className="btn btn-ghost">
-                Watch Live Demo
-              </a>
+              <a href="#pricing" className="btn btn-primary gold-glow">Start Free 14-Day Trial</a>
+              <a href="#demo" className="btn btn-ghost">Watch Live Demo</a>
             </div>
 
-            {/* TRUST BADGES (PNG — fixed sizes for CLS) */}
-            <div className="mt-8 flex flex-wrap justify-center items-center gap-6 md:gap-10">
-              <img src="/aws.png" alt="Powered by AWS Cloud" width={120} height={40} className="object-contain trust-img" loading="lazy" decoding="async" />
-              <img src="/stripe.png" alt="Secure Payments by Stripe" width={120} height={40} className="object-contain trust-img" loading="lazy" decoding="async" />
-              <img src="/encryption.png" alt="Bank-Level Encryption" width={120} height={40} className="object-contain trust-img" loading="lazy" decoding="async" />
-              <img src="/ai.png" alt="AI-Powered Accuracy" width={120} height={40} className="object-contain trust-img" loading="lazy" decoding="async" />
-              <img src="/support.png" alt="24/7 Support" width={120} height={40} className="object-contain trust-img" loading="lazy" decoding="async" />
+            {/* TRUST BADGES (3 on top, 2 centered below) */}
+            <div className="mt-8 flex flex-col items-center">
+              <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                <img src="/aws.png" alt="Powered by AWS Cloud" width="120" height="40" className="object-contain trust-img" loading="lazy" />
+                <img src="/stripe.png" alt="Secure Payments by Stripe" width="120" height="40" className="object-contain trust-img" loading="lazy" />
+                <img src="/ai.png" alt="AI-Powered Accuracy" width="120" height="40" className="object-contain trust-img" loading="lazy" />
+              </div>
+              <div className="mt-4 flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                <img src="/encryption.png" alt="Bank-Level Encryption" width="120" height="40" className="object-contain trust-img" loading="lazy" />
+                <img src="/support.png" alt="24/7 Support" width="120" height="40" className="object-contain trust-img" loading="lazy" />
+              </div>
             </div>
           </div>
 
-          {/* KPI card (min heights to avoid shift) */}
+          {/* KPI card with fixed min heights to reduce CLS */}
           <div className="glass rounded-2xl p-5 md:p-6" style={{ minHeight: 220 }}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
@@ -250,7 +354,8 @@ export default function Page() {
         <div className="container">
           <h2 className="h2 mb-3">Smart tools for smarter kitchens</h2>
           <p className="lead mb-10">
-            Price each dish to target margin, predict next week’s buy list, and stop losses before they happen.
+            Price each dish to target margin, predict next week’s buy list, and
+            stop losses before they happen.
           </p>
           <div className="grid md:grid-cols-3 gap-6">
             {[
@@ -268,9 +373,9 @@ export default function Page() {
         </div>
       </section>
 
-      {/* DEMO (SmartVideo) */}
+      {/* CHAT DEMO (SmartVideo) */}
       <section id="demo" className="relative section overflow-hidden">
-        {/* Poster first */}
+        {/* Poster */}
         <img
           src="/poster-chat.jpg"
           alt=""
@@ -295,7 +400,7 @@ export default function Page() {
             <source src="/chat.mp4" type="video/mp4" />
           </video>
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(31,45,80,0.45)] to-[rgba(36,51,93,0.62)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(34,52,99,0.45)] to-[rgba(42,63,115,0.62)]" />
 
         <div className="container relative z-10">
           <h2 className="h2 mb-2">Chef Maria × DishFuse AI</h2>
@@ -309,9 +414,11 @@ export default function Page() {
               </div>
 
               <div className="space-y-4">
-                <div className="bubble user">
-                  Hey DishFuse — what price should I set for our Margherita pizza this weekend?
-                </div>
+                {mounted && (
+                  <div className="bubble user">
+                    Hey DishFuse — what price should I set for our Margherita pizza this weekend?
+                  </div>
+                )}
                 {chatStep >= 1 && (
                   <div className="bubble ai">
                     Based on cost trends and demand spikes Fri–Sun, target price is{" "}
@@ -355,7 +462,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PROFIT CALCULATOR */}
+      {/* PROFIT CALCULATOR (before Pricing) */}
       <ROIProfitCalculator />
 
       {/* PRICING */}
@@ -366,7 +473,7 @@ export default function Page() {
             Choose the plan that fits your restaurant. Cancel anytime — no contracts.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
             {[
               {
                 plan: "Starter",
@@ -438,22 +545,19 @@ export default function Page() {
                 img: "https://randomuser.me/api/portraits/women/44.jpg",
                 name: "Chef Maria Thompson",
                 role: "Owner, Bella Forno",
-                quote:
-                  "DishFuse cut our waste by nearly 40%. Pricing confidence went way up and so did margins.",
+                quote: "DishFuse cut our waste by nearly 40%. Pricing confidence went way up and so did margins.",
               },
               {
                 img: "https://randomuser.me/api/portraits/men/32.jpg",
                 name: "James Carter",
                 role: "GM, Bistro 21",
-                quote:
-                  "Inventory forecasts are spot on. Ordering takes minutes and we avoid 86s on busy nights.",
+                quote: "Inventory forecasts are spot on. Ordering takes minutes and we avoid 86s on busy nights.",
               },
               {
                 img: "https://randomuser.me/api/portraits/women/65.jpg",
                 name: "Lena Ortiz",
                 role: "Owner, Café Luna",
-                quote:
-                  "Finally see which dishes actually make money. We adjusted prices and margins stabilized fast.",
+                quote: "Finally see which dishes actually make money. We adjusted prices and margins stabilized fast.",
               },
               {
                 img: "https://randomuser.me/api/portraits/men/12.jpg",
@@ -465,15 +569,13 @@ export default function Page() {
                 img: "https://randomuser.me/api/portraits/women/21.jpg",
                 name: "Priya Sharma",
                 role: "Operator, Spice Lane",
-                quote:
-                  "We used data to push weekend pricing gracefully—customers were happy and so were margins.",
+                quote: "We used data to push weekend pricing gracefully—customers were happy and so were margins.",
               },
               {
                 img: "https://randomuser.me/api/portraits/men/85.jpg",
                 name: "David Romero",
                 role: "Owner, GreenLeaf Café",
-                quote:
-                  "Clear reporting, simple actions. It’s like a profit coach built into our workflow.",
+                quote: "Clear reporting, simple actions. It’s like a profit coach built into our workflow.",
               },
             ].map((t) => (
               <div key={t.name} className="glass rounded-2xl p-6 border border-white/10">
@@ -556,8 +658,8 @@ export default function Page() {
             src={LOGO_FOOTER}
             alt="DishFuse"
             className="h-6 md:h-7"
-            width={160}
-            height={40}
+            width={140}
+            height={28}
             loading="lazy"
             decoding="async"
           />
@@ -570,197 +672,8 @@ export default function Page() {
   );
 }
 
-/* ---------- Subcomponents ---------- */
-
-function StyleBlock() {
-  return (
-    <style jsx global>{`
-      :root {
-        --navy: #1f2d50;
-        --navy-2: #24335d;
-        --gold: #f4c762;
-        --gold-2: #eeb94a;
-        --slate: #cbd5e1;
-      }
-      * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      .gold-glow {
-        position: relative;
-        isolation: isolate;
-      }
-      .gold-glow::before {
-        content: "";
-        position: absolute;
-        inset: -18px -22px;
-        z-index: -1;
-        background: radial-gradient(
-          60% 60% at 50% 50%,
-          rgba(244, 199, 98, 0.22) 0%,
-          rgba(244, 199, 98, 0.12) 35%,
-          transparent 70%
-        );
-        filter: blur(10px);
-        border-radius: 40px;
-        pointer-events: none;
-      }
-      .glass {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(10px);
-      }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        border-radius: 999px;
-        padding: 12px 18px; /* mobile normalized */
-        font-weight: 800;
-        font-size: 15px;
-        line-height: 1.1;
-        transition: all 0.2s ease;
-        will-change: transform, box-shadow;
-      }
-      @media (min-width: 768px) {
-        .btn {
-          padding: 14px 22px;
-          font-size: 16px;
-        }
-      }
-      .btn-primary {
-        color: #0b1222;
-        background: linear-gradient(135deg, var(--gold), var(--gold-2));
-        box-shadow: 0 8px 24px rgba(244, 199, 98, 0.25);
-      }
-      .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 14px 34px rgba(244, 199, 98, 0.35);
-      }
-      .btn-ghost {
-        border: 2px solid rgba(255, 255, 255, 0.85);
-        color: #fff;
-        padding: 10px 16px;
-      }
-      .btn-ghost:hover {
-        background: rgba(255, 255, 255, 0.08);
-      }
-      .pulse-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: #34d399;
-        animation: pulse 2s infinite;
-      }
-      @keyframes pulse {
-        0% {
-          transform: scale(0.95);
-          box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
-        }
-        70% {
-          transform: scale(1);
-          box-shadow: 0 0 0 16px rgba(52, 211, 153, 0);
-        }
-        100% {
-          transform: scale(0.95);
-          box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
-        }
-      }
-      .section {
-        padding: 72px 20px;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .h1 {
-        font-size: clamp(34px, 6vw, 56px);
-        line-height: 1.05;
-        font-weight: 900;
-      }
-      .h2 {
-        font-size: clamp(28px, 4.6vw, 40px);
-        font-weight: 800;
-      }
-      .lead {
-        color: var(--slate);
-        font-size: clamp(16px, 2.1vw, 20px);
-      }
-      .card {
-        border-radius: 20px;
-        padding: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: linear-gradient(160deg, #0f1a33, #0b1222);
-      }
-      .priceCard.popular {
-        border: 1px solid rgba(244, 199, 98, 0.65);
-        box-shadow: 0 18px 40px rgba(244, 199, 98, 0.1);
-        background: radial-gradient(
-            1200px 400px at 20% -10%,
-            rgba(244, 199, 98, 0.12),
-            transparent
-          ),
-          linear-gradient(160deg, #102042, #0b1222);
-      }
-      .bubble {
-        max-width: 540px;
-        padding: 14px 16px;
-        border-radius: 16px;
-        line-height: 1.4;
-        font-size: 15px;
-        opacity: 0;
-        transform: translateY(8px);
-        animation: fadeUp 0.6s ease forwards;
-      }
-      .bubble.ai {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-      }
-      .bubble.user {
-        background: rgba(244, 199, 98, 0.12);
-        border: 1px solid rgba(244, 199, 98, 0.35);
-      }
-      @keyframes fadeUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .faq-q {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
-        gap: 12px;
-        padding: 16px 18px;
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        transition: background 0.2s ease, border 0.2s ease;
-      }
-      .faq-q:hover {
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(255, 255, 255, 0.12);
-      }
-      .faq-a {
-        padding: 12px 4px 22px 4px;
-        color: var(--slate);
-      }
-      .trust-img {
-        transition: transform 0.2s ease;
-        display: block;
-      }
-      .trust-img:hover {
-        transform: translateY(-1px) scale(1.03);
-      }
-    `}</style>
-  );
-}
-
-/* ---------- FAQ ---------- */
-function FAQAccordion({ items = [] }: { items?: { q: string; a: string }[] }) {
+/* ---------- FAQ Accordion Component ---------- */
+function FAQAccordion({ items = [] }) {
   const [openIndex, setOpenIndex] = useState(0);
   return (
     <div className="grid gap-3">
@@ -775,15 +688,9 @@ function FAQAccordion({ items = [] }: { items?: { q: string; a: string }[] }) {
               aria-controls={`faq-panel-${idx}`}
             >
               <span className="font-semibold">{it.q}</span>
-              <span aria-hidden className="text-white/70">
-                {isOpen ? "−" : "+"}
-              </span>
+              <span aria-hidden className="text-white/70">{isOpen ? "−" : "+"}</span>
             </button>
-            {isOpen && (
-              <div id={`faq-panel-${idx}`} className="faq-a">
-                {it.a}
-              </div>
-            )}
+            {isOpen && <div id={`faq-panel-${idx}`} className="faq-a">{it.a}</div>}
           </div>
         );
       })}
@@ -791,38 +698,24 @@ function FAQAccordion({ items = [] }: { items?: { q: string; a: string }[] }) {
   );
 }
 
-/* ---------- Profit Calculator (Gold ROI Meter) ---------- */
+/* ---------- PROFIT CALCULATOR (Gold ROI Meter) ---------- */
 function ROIProfitCalculator() {
-  const [currency, setCurrency] = useState("USD");
-  const [revenue, setRevenue] = useState(100000); // converts well as default
-  const [foodPct, setFoodPct] = useState(35);
+  const [currency, setCurrency] = React.useState("USD");
+  const [revenue, setRevenue] = React.useState(100000); // default that converts well
+  const [foodPct, setFoodPct] = React.useState(35);
 
-  // Balanced improvement range
-  const LIFT_MIN = 0.12; // 12%
-  const LIFT_MAX = 0.24; // 24%
+  const LIFT_MIN = 0.12;
+  const LIFT_MAX = 0.24;
   const LIFT_MID = (LIFT_MIN + LIFT_MAX) / 2; // 18%
 
-  const currencyLocales: Record<string, string> = {
-    USD: "en-US",
-    EUR: "de-DE",
-    GBP: "en-GB",
-    CAD: "en-CA",
-    AUD: "en-AU",
-    NZD: "en-NZ",
-    MXN: "es-MX",
-    BRL: "pt-BR",
-    INR: "en-IN",
-    JPY: "ja-JP",
-    CNY: "zh-CN",
-    HKD: "zh-HK",
-    SGD: "en-SG",
-    ZAR: "en-ZA",
-    SEK: "sv-SE",
-    NOK: "nb-NO",
-    CHF: "de-CH",
+  const currencyLocales = {
+    USD: "en-US", EUR: "de-DE", GBP: "en-GB", CAD: "en-CA", AUD: "en-AU",
+    NZD: "en-NZ", MXN: "es-MX", BRL: "pt-BR", INR: "en-IN", JPY: "ja-JP",
+    CNY: "zh-CN", HKD: "zh-HK", SGD: "en-SG", ZAR: "en-ZA", SEK: "sv-SE",
+    NOK: "nb-NO", CHF: "de-CH",
   };
 
-  const fmt = useMemo(
+  const fmt = React.useMemo(
     () =>
       new Intl.NumberFormat(currencyLocales[currency] || "en-US", {
         style: "currency",
@@ -832,15 +725,14 @@ function ROIProfitCalculator() {
     [currency]
   );
 
-  // Derived profit numbers
-  const grossProfit = Math.max(0, revenue * (1 - foodPct / 100)); // monthly GP
+  const grossProfit = Math.max(0, revenue * (1 - foodPct / 100));
   const targetMin = grossProfit * LIFT_MIN;
   const targetMax = grossProfit * LIFT_MAX;
 
-  // Animate when in-view
-  const [animate, setAnimate] = useState(false);
-  const calcRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
+  const [animate, setAnimate] = React.useState(false);
+  const calcRef = React.useRef(null);
+
+  React.useEffect(() => {
     const el = calcRef.current;
     if (!el || typeof IntersectionObserver === "undefined") {
       setAnimate(true);
@@ -854,19 +746,18 @@ function ROIProfitCalculator() {
     return () => io.disconnect();
   }, []);
 
-  const useTicker = (val: number, active: boolean) => {
-    const [n, setN] = useState(0);
-    useEffect(() => {
+  const useTicker = (val, active) => {
+    const [n, setN] = React.useState(0);
+    React.useEffect(() => {
       if (!active) return;
-      let raf = 0,
-        start = 0;
+      let raf, start;
       const duration = 900;
       const from = 0;
       const to = val;
-      const animateFn = (t: number) => {
+      const animateFn = (t) => {
         if (!start) start = t;
         const p = Math.min(1, (t - start) / duration);
-        const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        const eased = 1 - Math.pow(1 - p, 3);
         setN(from + (to - from) * eased);
         if (p < 1) raf = requestAnimationFrame(animateFn);
       };
@@ -882,7 +773,7 @@ function ROIProfitCalculator() {
 
   return (
     <section id="calculator" ref={calcRef} className="section relative overflow-hidden">
-      {/* Soft gold background glow */}
+      {/* Soft gold glows */}
       <div
         className="pointer-events-none absolute inset-0 opacity-40"
         style={{
@@ -900,9 +791,7 @@ function ROIProfitCalculator() {
 
             {/* Currency selector */}
             <div className="flex items-center gap-3">
-              <label htmlFor="currency" className="text-sm text-white/80">
-                Currency
-              </label>
+              <label htmlFor="currency" className="text-sm text-white/80">Currency</label>
               <select
                 id="currency"
                 value={currency}
@@ -910,9 +799,7 @@ function ROIProfitCalculator() {
                 className="bg-transparent border border-white/20 rounded-xl px-3 py-2 text-sm"
               >
                 {Object.keys(currencyLocales).map((c) => (
-                  <option key={c} value={c} className="text-black">
-                    {c}
-                  </option>
+                  <option key={c} value={c} className="text-black">{c}</option>
                 ))}
               </select>
             </div>
@@ -922,12 +809,9 @@ function ROIProfitCalculator() {
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {/* Inputs */}
             <div className="space-y-5">
-              {/* Monthly Revenue */}
               <div>
                 <div className="mb-1 flex items-center justify-between">
-                  <label htmlFor="rev" className="font-semibold">
-                    Monthly revenue
-                  </label>
+                  <label htmlFor="rev" className="font-semibold">Monthly revenue</label>
                   <span className="text-white/70 text-sm">{fmt.format(revenue)}</span>
                 </div>
                 <input
@@ -946,12 +830,9 @@ function ROIProfitCalculator() {
                 </div>
               </div>
 
-              {/* Food Cost % */}
               <div>
                 <div className="mb-1 flex items-center justify-between">
-                  <label htmlFor="food" className="font-semibold">
-                    Food cost %
-                  </label>
+                  <label htmlFor="food" className="font-semibold">Food cost %</label>
                   <span className="text-white/70 text-sm">{foodPct}%</span>
                 </div>
                 <input
@@ -977,8 +858,7 @@ function ROIProfitCalculator() {
 
             {/* Results */}
             <div className="space-y-4">
-              {/* Meter */}
-              <div className="rounded-2xl p-4 border border-white/10 bg-[linear-gradient(160deg,#0f1a33,#0b1222)]">
+              <div className="rounded-2xl p-4 border border-white/10 bg-[linear-gradient(160deg,#10244a,#0b1a36)]">
                 <div className="flex items-end justify-between mb-2">
                   <div>
                     <div className="text-sm text-white/70">Estimated profit lift</div>
@@ -1001,7 +881,6 @@ function ROIProfitCalculator() {
                 </div>
               </div>
 
-              {/* Number Ticker Result */}
               <div className="card">
                 <div className="text-sm text-white/70 mb-1">With your numbers, you could unlock:</div>
                 <div className="text-3xl md:text-4xl font-extrabold">
@@ -1018,16 +897,10 @@ function ROIProfitCalculator() {
                 <div className="mt-2 text-xs text-white/60">
                   Based on restaurants switching from manual spreadsheets to AI ordering & pricing.
                 </div>
-              </div>
-
-              {/* CTA */}
-              <div className="flex flex-wrap items-center gap-3">
-                <a href="#pricing" className="btn btn-primary gold-glow">
-                  See Plans That Fit You
-                </a>
-                <a href="#demo" className="btn btn-ghost">
-                  Watch Live Demo
-                </a>
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <a href="#pricing" className="btn btn-primary gold-glow">See Plans That Fit You</a>
+                  <a href="#demo" className="btn btn-ghost">Watch Live Demo</a>
+                </div>
               </div>
             </div>
           </div>
@@ -1036,3 +909,4 @@ function ROIProfitCalculator() {
     </section>
   );
 }
+
