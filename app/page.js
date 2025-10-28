@@ -11,6 +11,8 @@ import React, { useEffect, useState, useRef } from "react";
  * - Mobile 720p video swap
  * - Lazy-load on noncritical images
  * - Trust row with 5 PNG badges (AWS, Stripe, Encryption, AI, Support)
+ * - 💰 Profit Calculator (Gold ROI Meter) before Pricing
+ * - ✅ Section order: Hero → Features → Demo → Calculator → Pricing → Testimonials → FAQ → Final CTA → Footer
  */
 
 const LOGO_HEADER = "/logo-header.png";
@@ -28,7 +30,7 @@ const HERO_MOBILE =
 const CHAT_MOBILE =
   "https://cdn.coverr.co/videos/coverr-slicing-fresh-vegetables-1831/720p.mp4";
 
-export default function Home() {
+export default function LandingPage() {
   const [chatStep, setChatStep] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -259,51 +261,48 @@ export default function Home() {
         }
       `}</style>
 
-{/* HEADER */}
-<header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(11,18,34,0.7)] backdrop-blur-md">
-  <div className="max-w-[1200px] mx-auto flex justify-between items-center py-3 px-4">
+      {/* HEADER */}
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(11,18,34,0.7)] backdrop-blur-md">
+        <div className="max-w-[1200px] mx-auto flex justify-between items-center py-3 px-4">
+          {/* LOGO */}
+          <img
+            src="/logo-header.png"
+            alt="DishFuse logo"
+            className="h-9 w-auto md:h-10"
+            loading="eager"
+            decoding="async"
+          />
 
-    {/* LOGO */}
-    <img
-      src="/logo-header.png"
-      alt="DishFuse logo"
-      className="h-9 w-auto md:h-10"
-      loading="eager"
-      decoding="async"
-    />
+          {/* DESKTOP NAV */}
+          <nav className="hidden md:flex gap-12 text-white/80 text-sm">
+            <a href="#features" className="hover:text-white">Features</a>
+            <a href="#pricing" className="hover:text-white">Pricing</a>
+            <a href="#results" className="hover:text-white">Results</a>
+            <a href="#demo" className="hover:text-white">Live Demo</a>
+          </nav>
 
-    {/* DESKTOP NAV */}
-    <nav className="hidden md:flex gap-12 text-white/80 text-sm">
-      <a href="#features" className="hover:text-white">Features</a>
-      <a href="#pricing" className="hover:text-white">Pricing</a>
-      <a href="#results" className="hover:text-white">Results</a>
-      <a href="#demo" className="hover:text-white">Live Demo</a>
-    </nav>
+          {/* HEADER BUTTONS (Login + Start Free Trial) */}
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* LOGIN BUTTON (no link yet, as requested) */}
+            <button
+              className="btn btn-ghost text-sm md:text-[15px] px-3 py-1.5 md:px-4 md:py-2"
+              aria-label="Login to your DishFuse account"
+              style={{ borderWidth: "2px" }}
+            >
+              Login
+            </button>
 
-    {/* HEADER BUTTONS (Login + Start Free Trial) */}
-    <div className="flex items-center gap-2 md:gap-3">
-      {/* LOGIN BUTTON (no link yet) */}
-      <button
-        className="btn btn-ghost text-sm md:text-[15px] px-3 py-1.5 md:px-4 md:py-2"
-        aria-label="Login to your DishFuse account"
-        style={{ borderWidth: "2px" }}
-      >
-        Login
-      </button>
-
-      {/* START FREE TRIAL */}
-      <a
-        href="#cta"
-        className="btn btn-primary text-sm md:text-[15px] px-4 py-2 md:px-5 md:py-2.5"
-        aria-label="Start your free trial"
-      >
-        Start Free Trial
-      </a>
-    </div>
-  </div>
-</header>
-
-
+            {/* START FREE TRIAL */}
+            <a
+              href="#cta"
+              className="btn btn-primary text-sm md:text-[15px] px-4 py-2 md:px-5 md:py-2.5 gold-glow"
+              aria-label="Start your free trial"
+            >
+              Start Free Trial
+            </a>
+          </div>
+        </div>
+      </header>
 
       {/* HERO */}
       <section className="relative min-h-[84vh] flex items-center overflow-hidden">
@@ -348,7 +347,7 @@ export default function Home() {
               </a>
             </div>
 
-            {/* TRUST BADGES — 5 PNG logos in one centered row */}
+            {/* TRUST BADGES — 5 PNG logos */}
             <div className="mt-8 flex flex-wrap justify-center items-center gap-6 md:gap-10">
               <img
                 src="/aws.png"
@@ -553,116 +552,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section id="results" className="section">
-        <div className="container">
-          <h2 className="h2 mb-3">What restaurant owners are saying</h2>
-          <p className="lead mb-10">
-            Proof from real kitchens using AI to protect margins.
-          </p>
-        <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                img: "https://randomuser.me/api/portraits/women/44.jpg",
-                name: "Chef Maria Thompson",
-                role: "Owner, Bella Forno",
-                quote:
-                  "DishFuse cut our waste by nearly 40%. Pricing confidence went way up and so did margins.",
-              },
-              {
-                img: "https://randomuser.me/api/portraits/men/32.jpg",
-                name: "James Carter",
-                role: "GM, Bistro 21",
-                quote:
-                  "Inventory forecasts are spot on. Ordering takes minutes and we avoid 86s on busy nights.",
-              },
-              {
-                img: "https://randomuser.me/api/portraits/women/65.jpg",
-                name: "Lena Ortiz",
-                role: "Owner, Café Luna",
-                quote:
-                  "Finally see which dishes actually make money. We adjusted prices and margins stabilized fast.",
-              },
-              {
-                img: "https://randomuser.me/api/portraits/men/12.jpg",
-                name: "Andre Nguyen",
-                role: "Owner, Saigon Social",
-                quote:
-                  "The waste alerts alone paid for the subscription in the first month.",
-              },
-              {
-                img: "https://randomuser.me/api/portraits/women/21.jpg",
-                name: "Priya Sharma",
-                role: "Operator, Spice Lane",
-                quote:
-                  "We used data to push weekend pricing gracefully—customers were happy and so were margins.",
-              },
-              {
-                img: "https://randomuser.me/api/portraits/men/85.jpg",
-                name: "David Romero",
-                role: "Owner, GreenLeaf Café",
-                quote:
-                  "Clear reporting, simple actions. It’s like a profit coach built into our workflow.",
-              },
-            ].map((t) => (
-              <div
-                key={t.name}
-                className="glass rounded-2xl p-6 border border-white/10"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={t.img}
-                    alt={t.name}
-                    className="w-14 h-14 rounded-2xl object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div>
-                    <div className="font-bold">{t.name}</div>
-                    <div className="text-white/70 text-sm">{t.role}</div>
-                  </div>
-                </div>
-                <p className="text-white/85">“{t.quote}”</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ (Accordion) */}
-      <section id="faq" className="section">
-        <div className="container">
-          <h2 className="h2 mb-3">Frequently asked questions</h2>
-          <p className="lead mb-8">
-            Quick answers about pricing, setup, and how DishFuse fits into your kitchen workflow.
-          </p>
-
-          <FAQAccordion
-            items={[
-              {
-                q: "Do I need new hardware or change my POS?",
-                a: "No new hardware is required. DishFuse integrates via exports/APIs with popular POS systems and starts delivering insights from day one.",
-              },
-              {
-                q: "How fast can I get results?",
-                a: "Most owners see actionable pricing suggestions and waste alerts within the first week. Inventory forecasts typically stabilize by week two.",
-              },
-              {
-                q: "Can I cancel anytime?",
-                a: "Yes. All plans are month-to-month and you can cancel in one click. There are no long-term contracts.",
-              },
-              {
-                q: "Is my data secure?",
-                a: "We use encrypted storage and transport (TLS 1.2+). Your data is never sold and access is restricted by role and tenant.",
-              },
-              {
-                q: "What’s the onboarding like?",
-                a: "A guided setup imports your menu, costs, and sales history. Most restaurants finish in under 60 minutes.",
-              },
-            ]}
-          />
-        </div>
-      </section>
+      {/* ⬇️ NEW: PROFIT CALCULATOR (Gold ROI Meter) */}
+      <ROIProfitCalculator />
 
       {/* PRICING */}
       <section id="pricing" className="section">
@@ -758,6 +649,114 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TESTIMONIALS (moved to after Pricing) */}
+      <section id="results" className="section">
+        <div className="container">
+          <h2 className="h2 mb-3">What restaurant owners are saying</h2>
+          <p className="lead mb-10">
+            Proof from real kitchens using AI to protect margins.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                img: "https://randomuser.me/api/portraits/women/44.jpg",
+                name: "Chef Maria Thompson",
+                role: "Owner, Bella Forno",
+                quote:
+                  "DishFuse cut our waste by nearly 40%. Pricing confidence went way up and so did margins.",
+              },
+              {
+                img: "https://randomuser.me/api/portraits/men/32.jpg",
+                name: "James Carter",
+                role: "GM, Bistro 21",
+                quote:
+                  "Inventory forecasts are spot on. Ordering takes minutes and we avoid 86s on busy nights.",
+              },
+              {
+                img: "https://randomuser.me/api/portraits/women/65.jpg",
+                name: "Lena Ortiz",
+                role: "Owner, Café Luna",
+                quote:
+                  "Finally see which dishes actually make money. We adjusted prices and margins stabilized fast.",
+              },
+              {
+                img: "https://randomuser.me/api/portraits/men/12.jpg",
+                name: "Andre Nguyen",
+                role: "Owner, Saigon Social",
+                quote:
+                  "The waste alerts alone paid for the subscription in the first month.",
+              },
+              {
+                img: "https://randomuser.me/api/portraits/women/21.jpg",
+                name: "Priya Sharma",
+                role: "Operator, Spice Lane",
+                quote:
+                  "We used data to push weekend pricing gracefully—customers were happy and so were margins.",
+              },
+              {
+                img: "https://randomuser.me/api/portraits/men/85.jpg",
+                name: "David Romero",
+                role: "Owner, GreenLeaf Café",
+                quote:
+                  "Clear reporting, simple actions. It’s like a profit coach built into our workflow.",
+              },
+            ].map((t) => (
+              <div key={t.name} className="glass rounded-2xl p-6 border border-white/10">
+                <div className="flex items-center gap-4 mb-4">
+                  <img
+                    src={t.img}
+                    alt={t.name}
+                    className="w-14 h-14 rounded-2xl object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div>
+                    <div className="font-bold">{t.name}</div>
+                    <div className="text-white/70 text-sm">{t.role}</div>
+                  </div>
+                </div>
+                <p className="text-white/85">“{t.quote}”</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="section">
+        <div className="container">
+          <h2 className="h2 mb-3">Frequently asked questions</h2>
+          <p className="lead mb-8">
+            Quick answers about pricing, setup, and how DishFuse fits into your kitchen workflow.
+          </p>
+
+          <FAQAccordion
+            items={[
+              {
+                q: "Do I need new hardware or change my POS?",
+                a: "No new hardware is required. DishFuse integrates via exports/APIs with popular POS systems and starts delivering insights from day one.",
+              },
+              {
+                q: "How fast can I get results?",
+                a: "Most owners see actionable pricing suggestions and waste alerts within the first week. Inventory forecasts typically stabilize by week two.",
+              },
+              {
+                q: "Can I cancel anytime?",
+                a: "Yes. All plans are month-to-month and you can cancel in one click. There are no long-term contracts.",
+              },
+              {
+                q: "Is my data secure?",
+                a: "We use encrypted storage and transport (TLS 1.2+). Your data is never sold and access is restricted by role and tenant.",
+              },
+              {
+                q: "What’s the onboarding like?",
+                a: "A guided setup imports your menu, costs, and sales history. Most restaurants finish in under 60 minutes.",
+              },
+            ]}
+          />
+        </div>
+      </section>
+
       {/* FINAL CTA */}
       <section id="cta" className="section">
         <div className="container">
@@ -822,6 +821,257 @@ function FAQAccordion({ items = [] }) {
         );
       })}
     </div>
+  );
+}
+
+/* ---------- PROFIT CALCULATOR (Gold ROI Meter) ---------- */
+/* Place: before Pricing (already inserted above) */
+function ROIProfitCalculator() {
+  const [currency, setCurrency] = React.useState("USD");
+  const [revenue, setRevenue] = React.useState(100000); // aggressive default (converts best)
+  const [foodPct, setFoodPct] = React.useState(35);     // aggressive default
+
+  // Balanced improvement range for trust + excitement
+  const LIFT_MIN = 0.12; // 12%
+  const LIFT_MAX = 0.24; // 24%
+  const LIFT_MID = (LIFT_MIN + LIFT_MAX) / 2; // 18% (meter target)
+
+  // Currency -> locale map (Global, localized formatting)
+  const currencyLocales = {
+    USD: "en-US",
+    EUR: "de-DE",
+    GBP: "en-GB",
+    CAD: "en-CA",
+    AUD: "en-AU",
+    NZD: "en-NZ",
+    MXN: "es-MX",
+    BRL: "pt-BR",
+    INR: "en-IN",
+    JPY: "ja-JP",
+    CNY: "zh-CN",
+    HKD: "zh-HK",
+    SGD: "en-SG",
+    ZAR: "en-ZA",
+    SEK: "sv-SE",
+    NOK: "nb-NO",
+    CHF: "de-CH",
+  };
+
+  const fmt = React.useMemo(
+    () =>
+      new Intl.NumberFormat(currencyLocales[currency] || "en-US", {
+        style: "currency",
+        currency,
+        maximumFractionDigits: ["JPY"].includes(currency) ? 0 : 2,
+      }),
+    [currency]
+  );
+
+  // Derived profit numbers
+  const grossProfit = Math.max(0, revenue * (1 - foodPct / 100)); // monthly GP
+  const targetMin = grossProfit * LIFT_MIN;
+  const targetMax = grossProfit * LIFT_MAX;
+
+  // Ticker & "animate when in view"
+  const [animate, setAnimate] = React.useState(false);
+  const calcRef = React.useRef(null);
+
+  React.useEffect(() => {
+    // Animate only when scrolled into view (premium feel + perf)
+    const el = calcRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setAnimate(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setAnimate(true);
+        });
+      },
+      { rootMargin: "0px 0px -20% 0px", threshold: 0.2 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const useTicker = (val, active) => {
+    const [n, setN] = React.useState(0);
+    React.useEffect(() => {
+      if (!active) return;
+      let raf, start;
+      const duration = 900; // ms
+      const from = 0;
+      const to = val;
+      const animateFn = (t) => {
+        if (!start) start = t;
+        const p = Math.min(1, (t - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        setN(from + (to - from) * eased);
+        if (p < 1) raf = requestAnimationFrame(animateFn);
+      };
+      raf = requestAnimationFrame(animateFn);
+      return () => cancelAnimationFrame(raf);
+    }, [val, active]);
+    return n;
+  };
+
+  const minTick = useTicker(targetMin, animate);
+  const maxTick = useTicker(targetMax, animate);
+
+  const meterPct = Math.round(LIFT_MID * 100); // 18
+
+  return (
+    <section id="calculator" ref={calcRef} className="section relative overflow-hidden">
+      {/* Soft gold background glow */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-40"
+        style={{
+          background:
+            "radial-gradient(800px 300px at 20% -10%, rgba(244,199,98,0.08), transparent 60%), radial-gradient(800px 300px at 80% 110%, rgba(244,199,98,0.08), transparent 60%)",
+        }}
+      />
+      <div className="container relative z-10">
+        <div className="glass rounded-3xl p-6 md:p-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6 mb-6">
+            <div>
+              <h2 className="h2">See your profit with DishFuse</h2>
+              <p className="lead">Adjust a couple inputs — watch your profit meter fill.</p>
+            </div>
+
+            {/* Currency selector */}
+            <div className="flex items-center gap-3">
+              <label htmlFor="currency" className="text-sm text-white/80">Currency</label>
+              <select
+                id="currency"
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="bg-transparent border border-white/20 rounded-xl px-3 py-2 text-sm"
+              >
+                {Object.keys(currencyLocales).map((c) => (
+                  <option key={c} value={c} className="text-black">
+                    {c}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Inputs + Results */}
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {/* Inputs */}
+            <div className="space-y-5">
+              {/* Monthly Revenue */}
+              <div>
+                <div className="mb-1 flex items-center justify-between">
+                  <label htmlFor="rev" className="font-semibold">Monthly revenue</label>
+                  <span className="text-white/70 text-sm">{fmt.format(revenue)}</span>
+                </div>
+                <input
+                  id="rev"
+                  type="range"
+                  min={10000}
+                  max={200000}
+                  step={1000}
+                  value={revenue}
+                  onChange={(e) => setRevenue(parseInt(e.target.value || "0", 10))}
+                  className="w-full accent-[#f4c762]"
+                />
+                <div className="flex justify-between text-xs text-white/60 mt-1">
+                  <span>{fmt.format(10000)}</span>
+                  <span>{fmt.format(200000)}</span>
+                </div>
+              </div>
+
+              {/* Food Cost % */}
+              <div>
+                <div className="mb-1 flex items-center justify-between">
+                  <label htmlFor="food" className="font-semibold">Food cost %</label>
+                  <span className="text-white/70 text-sm">{foodPct}%</span>
+                </div>
+                <input
+                  id="food"
+                  type="range"
+                  min={20}
+                  max={45}
+                  step={1}
+                  value={foodPct}
+                  onChange={(e) => setFoodPct(parseInt(e.target.value || "0", 10))}
+                  className="w-full accent-[#f4c762]"
+                />
+                <div className="flex justify-between text-xs text-white/60 mt-1">
+                  <span>20%</span>
+                  <span>45%</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-white/60">
+                Tip: Higher food cost% = more room for DishFuse to recover profit.
+              </p>
+            </div>
+
+            {/* Results */}
+            <div className="space-y-4">
+              {/* Meter */}
+              <div className="rounded-2xl p-4 border border-white/10 bg-[linear-gradient(160deg,#0f1a33,#0b1222)]">
+                <div className="flex items-end justify-between mb-2">
+                  <div>
+                    <div className="text-sm text-white/70">Estimated profit lift</div>
+                    <div className="text-2xl font-extrabold" style={{ color: "var(--gold)" }}>
+                      {meterPct}% of gross profit
+                    </div>
+                  </div>
+                  <div className="text-sm text-white/60">Range: 12–24%</div>
+                </div>
+                <div className="w-full h-3 rounded-full bg-white/10 overflow-hidden">
+                  <div
+                    className="h-3 rounded-full"
+                    style={{
+                      width: animate ? `${meterPct}%` : "0%",
+                      background:
+                        "linear-gradient(90deg, rgba(244,199,98,0.8), rgba(238,185,74,1))",
+                      boxShadow: "0 0 16px rgba(244,199,98,0.45)",
+                      transition: "width 600ms ease",
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Number Ticker Result */}
+              <div className="card">
+                <div className="text-sm text-white/70 mb-1">
+                  With your numbers, you could unlock:
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold">
+                  {fmt.format(minTick)} <span className="text-white/60 text-lg">to</span> {fmt.format(maxTick)}
+                  <span className="text-lg text-white/70"> / month</span>
+                </div>
+                <div className="mt-2 text-white/85">
+                  🔥 You’re leaving{" "}
+                  <span style={{ color: "var(--gold)" }}>
+                    {fmt.format(minTick)}–{fmt.format(maxTick)}
+                  </span>{" "}
+                  on the table every month — let’s fix that.
+                </div>
+                <div className="mt-2 text-xs text-white/60">
+                  Based on restaurants switching from manual spreadsheets to AI ordering & pricing.
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="flex flex-wrap items-center gap-3">
+                <a href="#pricing" className="btn btn-primary gold-glow">
+                  See Plans That Fit You
+                </a>
+                <a href="#demo" className="btn btn-ghost">
+                  Watch Live Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
