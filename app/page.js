@@ -261,13 +261,13 @@ export default function Home() {
 
 {/* HEADER */}
 <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(11,18,34,0.7)] backdrop-blur-md">
-  <div className="max-w-[1200px] mx-auto flex justify-between items-center py-4 px-4">
+  <div className="max-w-[1200px] mx-auto flex justify-between items-center py-3 px-4">
 
     {/* LOGO */}
     <img
       src="/logo-header.png"
       alt="DishFuse logo"
-      className="h-10 w-auto"
+      className="h-9 w-auto md:h-10"
       loading="eager"
       decoding="async"
     />
@@ -280,18 +280,21 @@ export default function Home() {
       <a href="#demo" className="hover:text-white">Live Demo</a>
     </nav>
 
-    {/* CTAs */}
-    <div className="flex items-center gap-3">
-      <a
-        href="#login"
-        className="btn btn-ghost"
-        aria-label="Log in to your DishFuse account"
+    {/* HEADER BUTTONS (Login + Start Free Trial) */}
+    <div className="flex items-center gap-2 md:gap-3">
+      {/* LOGIN BUTTON (no link yet) */}
+      <button
+        className="btn btn-ghost text-sm md:text-[15px] px-3 py-1.5 md:px-4 md:py-2"
+        aria-label="Login to your DishFuse account"
+        style={{ borderWidth: "2px" }}
       >
-        Log In
-      </a>
+        Login
+      </button>
+
+      {/* START FREE TRIAL */}
       <a
         href="#cta"
-        className="btn btn-primary"
+        className="btn btn-primary text-sm md:text-[15px] px-4 py-2 md:px-5 md:py-2.5"
         aria-label="Start your free trial"
       >
         Start Free Trial
@@ -299,6 +302,7 @@ export default function Home() {
     </div>
   </div>
 </header>
+
 
 
       {/* HERO */}
