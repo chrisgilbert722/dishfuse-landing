@@ -152,7 +152,12 @@ export default function LandingPage() {
 
         .play-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
         .play-btn { background:rgba(0,0,0,.45); border:2px solid rgba(255,255,255,.9); border-radius:999px; padding:12px 18px; font-weight:800; }
-      `}</style>
+      `}        /* Overlay content pinned to top of video */
+        .overlay-content { position: absolute; left: 0; right: 0; top: 8px; z-index: 10; }
+        @media (min-width: 768px) { .overlay-content { top: 12px; } }
+        /* Fixed-height chat transcript so section doesn't push content below */
+        .chat-window { position: relative; height: 360px; overflow: hidden; }
+      </style>
 
       {/* HEADER */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(11,18,34,0.7)] backdrop-blur-md">
@@ -332,7 +337,7 @@ export default function LandingPage() {
 
         <div className="absolute inset-0 pointer-events-none" />
 
-        <div className="container relative z-10" style={{ marginTop: 0 }}>
+        <div className="container relative z-10 overlay-content" style={{ marginTop: 0 }}>
           <h2 className="h2 mb-2">Chef Maria × DishFuse AI</h2>
           <p className="lead mb-8">See how owners get answers in seconds.</p>
 
@@ -343,7 +348,7 @@ export default function LandingPage() {
                 <p className="text-sm text-white/80">Live demo — simulated conversation</p>
               </div>
 
-              <div className="space-y-4">
+              <div className="chat-window"><div className="space-y-4">
                 {mounted && <div className="bubble user">Hey DishFuse — what price should I set for our Margherita pizza this weekend?</div>}
                 {chatStep >= 1 && (
                   <div className="bubble ai">
@@ -378,10 +383,10 @@ export default function LandingPage() {
                   <p className="text-white/75">{p}</p>
                 </div>
               ))}
+              </div></div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* ⬇️ PROFIT CALCULATOR (includes pre-filled 42% waste reduction) */}
       <ROIProfitCalculator />
@@ -713,6 +718,7 @@ function ROIProfitCalculator() {
     </section>
   );
 }
+
 
 
 
