@@ -655,7 +655,7 @@ function ROIProfitCalculator() {
           {/* Inputs + Results */}
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {/* Inputs */}
-            <div className="space-y-5">
+            <div className="space-y-5 mt-10">
               {/* Monthly Revenue */}
               <div>
                 <div className="mb-1 flex items-center justify-between">
