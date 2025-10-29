@@ -140,7 +140,7 @@ export default function LandingPage() {
         .hero-media { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
         .hero-overlay { position:absolute; inset:0; }
         @media (min-width: 768px) {
-          .demo-wrap { min-height: 1000px; }
+          .demo-wrap { min-height: 1000px; } }
         }
         .demo-media { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
         @media (min-width: 768px) {
@@ -282,7 +282,7 @@ export default function LandingPage() {
       </section>
 
       {/* CHAT DEMO — desktop autoplay; mobile tap-to-play poster; fixed height */}
-      <section id="demo" className="section relative overflow-hidden">
+      <section id="demo" className="section relative overflow-hidden" style={{ paddingTop: "12px" }}>
         <div id="chat-demo-section" className="demo-wrap">
           {isMobile ? (
             <>
@@ -332,7 +332,7 @@ export default function LandingPage() {
 
         <div className="absolute inset-0 pointer-events-none" />
 
-        <div className="container relative z-10">
+        <div className="container relative z-10" style={{ marginTop: 0 }}>
           <h2 className="h2 mb-2">Chef Maria × DishFuse AI</h2>
           <p className="lead mb-8">See how owners get answers in seconds.</p>
 
@@ -713,5 +713,6 @@ function ROIProfitCalculator() {
     </section>
   );
 }
+
 
 
