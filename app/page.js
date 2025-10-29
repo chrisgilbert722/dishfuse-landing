@@ -156,7 +156,7 @@ export default function LandingPage() {
         .overlay-content { position: absolute; left: 0; right: 0; top: 8px; z-index: 10; }
         @media (min-width: 768px) { .overlay-content { top: 12px; } }
         /* Fixed-height chat transcript so section doesn't push content below */
-        .chat-window { position: relative; height: 360px; overflow: hidden; }
+        .chat-window { position: relative; height: 420px; overflow: hidden; }
       </style>
 
       {/* HEADER */}
@@ -287,7 +287,7 @@ export default function LandingPage() {
       </section>
 
       {/* CHAT DEMO — desktop autoplay; mobile tap-to-play poster; fixed height */}
-      <section id="demo" className="section relative overflow-hidden" style={{ paddingTop: "12px" }}>
+      <section id="demo" className="relative overflow-hidden" style={{ padding: 0 }}>
         <div id="chat-demo-section" className="demo-wrap">
           {isMobile ? (
             <>
@@ -718,6 +718,7 @@ function ROIProfitCalculator() {
     </section>
   );
 }
+
 
 
 
