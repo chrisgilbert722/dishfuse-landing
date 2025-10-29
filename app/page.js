@@ -140,7 +140,7 @@ export default function LandingPage() {
         .hero-media { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
         .hero-overlay { position:absolute; inset:0; }
         @media (min-width: 768px) {
-          .demo-wrap { min-height: 830px; }
+          .demo-wrap { min-height: 1000px; }
         }
         .demo-media { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
         @media (min-width: 768px) {
@@ -713,4 +713,5 @@ function ROIProfitCalculator() {
     </section>
   );
 }
+
 
