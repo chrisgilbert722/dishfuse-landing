@@ -682,7 +682,7 @@ function ROIProfitCalculator() {
             {/* Results */}
             <div className="space-y-4">
               {/* Meter */}
-              <div className="rounded-2xl p-4 border border-white/10 bg-[linear-gradient(160deg,#0f1a33,#0b1222)]">
+              <div className="rounded-2xl p-6 pt-8 border border-white/10 bg-[linear-gradient(160deg,#0f1a33,#0b1222)]">
                 <div className="flex items-end justify-between mb-2">
                   <div>
                     <div className="text-sm text-white/70">Estimated profit lift (incl. waste savings)</div>
