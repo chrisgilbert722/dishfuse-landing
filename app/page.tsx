@@ -54,7 +54,7 @@ export default function Page() {
         </div>
       </header>
 
-      {/* HERO */}
+      {/* HERO SECTION */}
       <section className="relative min-h-[84vh] flex items-center overflow-hidden">
         <video
           autoPlay
@@ -76,8 +76,9 @@ export default function Page() {
 
         <div className="container relative z-10 grid md:grid-cols-2 gap-10 items-center py-16">
           <div>
-            {/* Animated intro line */}
-            {/* @ts-ignore - suppress motion.div type mismatch */}
+            {/* Animated intro line — suppress TS typing issue */}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-ignore */}
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
