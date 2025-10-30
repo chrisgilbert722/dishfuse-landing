@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #1f2d50;
+  --navy-2: #24335d;
+  --gold: #f4c762;
+  --gold-2: #eeb94a;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: linear-gradient(to bottom, var(--navy), var(--navy-2));
+  color: white;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
