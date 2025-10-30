@@ -54,7 +54,7 @@ export default function Page() {
         </div>
       </header>
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="relative min-h-[84vh] flex items-center overflow-hidden">
         <video
           autoPlay
@@ -76,7 +76,7 @@ export default function Page() {
 
         <div className="container relative z-10 grid md:grid-cols-2 gap-10 items-center py-16">
           <div>
-            {/* animated line */}
+            {/* Animated intro line */}
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ export default function Page() {
               </a>
             </div>
 
-            {/* trust badges */}
+            {/* Trust badges */}
             <div className="mt-8 flex flex-wrap items-center gap-6 md:gap-10">
               {[
                 ["/aws.png", "Powered by AWS"],
@@ -132,7 +132,7 @@ export default function Page() {
             </div>
           </div>
 
-          {/* KPI cards */}
+          {/* KPI Cards */}
           <div className="glass rounded-2xl p-5 md:p-6">
             <div className="grid grid-cols-3 gap-3 md:gap-4">
               {[
