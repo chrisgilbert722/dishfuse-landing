@@ -1,16 +1,64 @@
-/* app/globals.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: black;
-  color: white;
-  font-family: 'Inter', sans-serif;
+:root {
+  --navy: #1F2D50;
+  --navy2: #24335D;
+  --gold: #F4C762;
+  --gold2: #EEB94A;
 }
 
-a {
-  color: #facc15;
-  text-decoration: none;
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.gold-glow {
+  position: relative;
+  isolation: isolate;
+}
+.gold-glow::before {
+  content: "";
+  position: absolute;
+  inset: -16px -18px;
+  z-index: -1;
+  border-radius: 36px;
+  background: radial-gradient(
+    60% 60% at 50% 50%,
+    rgba(244, 199, 98, 0.22) 0%,
+    rgba(244, 199, 98, 0.12) 35%,
+    transparent 70%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.glass {
+  @apply bg-white/5 border border-white/10 backdrop-blur-md;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full font-extrabold transition-all;
+}
+
+.btn-primary {
+  @apply text-navy-900;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  box-shadow: 0 8px 24px rgba(244, 199, 98, 0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(244, 199, 98, 0.35);
+}
+
+.btn-ghost {
+  @apply text-white border-2 border-white/80;
+}
+
+.section {
+  @apply py-16 px-4;
+}
+.container {
+  @apply max-w-[1200px] mx-auto;
 }
