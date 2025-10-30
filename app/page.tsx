@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import ROIProfitCalculator from "./components/ROIProfitCalculator";
 
 export default function Page() {
   const [isMobile, setIsMobile] = useState(false);
@@ -54,7 +55,7 @@ export default function Page() {
         </div>
       </header>
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="relative min-h-[84vh] flex items-center overflow-hidden">
         <video
           autoPlay
@@ -76,7 +77,7 @@ export default function Page() {
 
         <div className="container relative z-10 grid md:grid-cols-2 gap-10 items-center py-16">
           <div>
-            {/* Animated intro line — suppress TS typing issue */}
+            {/* Animated intro line */}
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
             <motion.div
@@ -161,6 +162,9 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ROI PROFIT CALCULATOR */}
+      <ROIProfitCalculator />
+
       {/* CTA */}
       <section id="cta" className="section">
         <div className="container">
@@ -181,6 +185,23 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 py-10 bg-navy-900">
+        <div className="container flex flex-col items-center gap-4">
+          <Image
+            src="/logo-footer.png"
+            alt="DishFuse"
+            width={120}
+            height={32}
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="text-white/60 text-sm">
+            © {new Date().getFullYear()} DishFuse. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
