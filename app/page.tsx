@@ -77,6 +77,7 @@ export default function Page() {
         <div className="container relative z-10 grid md:grid-cols-2 gap-10 items-center py-16">
           <div>
             {/* Animated intro line */}
+            {/* @ts-ignore - suppress motion.div type mismatch */}
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
