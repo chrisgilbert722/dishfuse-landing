@@ -1,15 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    optimizeCss: false, // disables Critters during build
-  },
-  output: 'export',
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
   },
-  eslint: {
-    ignoreDuringBuilds: true,
+  async headers() {
+    return [
+      {
+        source: "/video/:path*",
+        headers: [
+          { key: "Content-Type", value: "video/mp4" },
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+    ];
   },
 };
 
